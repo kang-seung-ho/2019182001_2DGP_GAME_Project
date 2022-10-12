@@ -1,5 +1,9 @@
 from pico2d import *
 import random
+import game_framework
+# import logo_state
+
+
 WIDTH, HEIGHT = 1280, 720
 
 def handle_events():
@@ -33,18 +37,17 @@ def handle_events():
 
 
 
-
 open_canvas(WIDTH, HEIGHT)
 
 dirx, diry = 0,0
 x = WIDTH//2
 y = HEIGHT//2
-background_spring = load_image('')
+background_spring = load_image('map1.png')
 running = True
 stage = 1
 
-character=load_image()
-monster1 = load_image('')
+# character=load_image()
+# monster1 = load_image('')
 frame=0
 character_state = 0
 
@@ -67,10 +70,18 @@ def character_draw(location, x, y):
 
 round1_monster = [monsters for i in range (20)] #라운드 1에서 몬스터 20마리 출현
 
+# game_framework.run(logo_state)
+
+object_tree_spring = load_image('tree2.png')
+
 while running:
     clear_canvas()
     if stage == 1:
-        # backgroud_spring.draw(WIDTH//2, HEIGHT//2)
+        background_spring.draw(WIDTH//2, HEIGHT//2)
+        object_tree_spring.draw(700, 650, 144, 144)
+        object_tree_spring.draw(700, 70, 144, 144)
+        object_tree_spring.draw(400, 500, 144, 144)
+        object_tree_spring.draw(400, 300, 144, 144)
         update_canvas()
         handle_events()
         frame = (frame + 1) % 8
@@ -79,7 +90,13 @@ while running:
 
         if dirx == 0:
             if character_state == 0:
-                character.clip_draw()
+                pass
+                # character.clip_draw(frame*, )
+            elif character_state == 1:
+                pass
+
+                
+                # character.clip_draw()
 
         frame = (frame + 1) % 8
         x += dirx * 5

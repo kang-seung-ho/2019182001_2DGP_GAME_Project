@@ -40,6 +40,7 @@ powerup_item = load_image('power_up_arrow.png')
 itembox = load_image('itembox.png')
 potion = load_image('potion.png')
 cannon = load_image('cannon.png')
+attack = load_image('gun.png')
 running = True
 background_summer = load_image('map2_summer.png')
 frame = 0
@@ -60,6 +61,7 @@ while running:
     powerup_item.draw(520, 66, 80, 80)
     potion.draw(600, 60, 80, 80)
     cannon.draw(680, 60, 80, 80)
+    attack.draw(800, 60, 80, 80)
 
     update_canvas()
     handle_events()

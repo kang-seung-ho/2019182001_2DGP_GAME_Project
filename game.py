@@ -42,12 +42,10 @@ open_canvas(WIDTH, HEIGHT)
 dirx, diry = 0,0
 x = WIDTH//2
 y = HEIGHT//2
-background_spring = load_image('map1.png')
+background_spring = load_image('map1_spring.png')
 running = True
 stage = 1
 
-# character=load_image()
-# monster1 = load_image('')
 frame=0
 character_state = 0
 
@@ -73,31 +71,37 @@ round1_monster = [monsters for i in range (20)] #라운드 1에서 몬스터 20�
 # game_framework.run(logo_state)
 
 object_tree_spring = load_image('tree2.png')
-
+fortress = load_image('fortress.png')
+powerup_item = load_image('power_up_arrow.png')
+itembox = load_image('itembox.png')
+potion = load_image('potion.png')
+cannon = load_image('cannon.png')
 while running:
     clear_canvas()
-    if stage == 1:
-        background_spring.draw(WIDTH//2, HEIGHT//2)
-        object_tree_spring.draw(700, 650, 144, 144)
-        object_tree_spring.draw(700, 70, 144, 144)
-        object_tree_spring.draw(400, 500, 144, 144)
-        object_tree_spring.draw(400, 300, 144, 144)
-        update_canvas()
-        handle_events()
-        frame = (frame + 1) % 8
-        x += dirx * 5
-        y += diry * 5
+    
+    background_spring.draw(WIDTH//2, HEIGHT//2)
+    object_tree_spring.draw(400, 650, 120, 120)
+    fortress.draw(700, 500, 120, 120)
+    object_tree_spring.draw(400, 300, 120, 120)
+    fortress.draw(700,200, 120, 120)
+    itembox.draw(600, 60, 300 , 140)
+    powerup_item.draw(520, 67, 80, 80)
+    potion.draw(600, 60, 80, 80)
+    cannon.draw(680, 60, 80, 80)
 
-        if dirx == 0:
-            if character_state == 0:
-                pass
-                # character.clip_draw(frame*, )
-            elif character_state == 1:
-                pass
-
+    update_canvas()
+    handle_events()
+    frame = (frame + 1) % 8
+    x += dirx * 5
+    y += diry * 5
+    if dirx == 0:
+        if character_state == 0:
+            pass
+            # character.clip_draw(frame*, )
+        elif character_state == 1:
+            pass
                 
-                # character.clip_draw()
-
+            # character.clip_draw()
         frame = (frame + 1) % 8
         x += dirx * 5
         y += diry * 5

@@ -1,9 +1,6 @@
 from pico2d import *
 import random
 import game_framework
-# import logo_state
-
-
 WIDTH, HEIGHT = 1280, 720
 
 def handle_events():
@@ -36,50 +33,25 @@ def handle_events():
                 diry += 1
 
 
-
 open_canvas(WIDTH, HEIGHT)
-
-dirx, diry = 0,0
-x = WIDTH//2
-y = HEIGHT//2
-background_spring = load_image('map1_spring.png')
-running = True
-stage = 1
-
-frame=0
-character_state = 0
-
-class monsters:
-    def __init__(self):
-        self.x, self.y = 1200, random.randint(20, 600)
-        self.frame = random.randint(0, 7)
-        self.image = load_image('goblinsword.png')
-
-    def update(self):
-        self.frame = (self.frame + 1) % 8
-        self.x += 3
-
-    def draw(self):
-        self.image.clip_draw(self.frame*64, 64*2, 64, 64, self.x, self.y, 144, 144)
-
-def character_draw(location, x, y):
-    character.clip_draw()
-
-
-round1_monster = [monsters for i in range (20)] #라운드 1에서 몬스터 20마리 출현
-
-# game_framework.run(logo_state)
-
 object_tree_spring = load_image('tree2.png')
 fortress = load_image('fortress.png')
 powerup_item = load_image('power_up_arrow.png')
 itembox = load_image('itembox.png')
 potion = load_image('potion.png')
 cannon = load_image('cannon.png')
+running = True
+background_summer = load_image('map2_summer.png')
+frame = 0
+
+x=0
+y=0
+dirx = 0
+diry = 0
 while running:
     clear_canvas()
     
-    background_spring.draw(WIDTH//2, HEIGHT//2)
+    background_summer.draw(WIDTH//2, HEIGHT//2)
     object_tree_spring.draw(400, 650, 120, 120)
     fortress.draw(700, 500, 120, 120)
     object_tree_spring.draw(400, 300, 120, 120)
@@ -95,11 +67,7 @@ while running:
     x += dirx * 5
     y += diry * 5
     if dirx == 0:
-        if character_state == 0:
-            pass
-            # character.clip_draw(frame*, )
-        elif character_state == 1:
-            pass
+        
                 
             # character.clip_draw()
         frame = (frame + 1) % 8

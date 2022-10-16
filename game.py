@@ -46,7 +46,7 @@ open_canvas(WIDTH, HEIGHT)
 dirx, diry = 0,0
 x = WIDTH//2
 y = HEIGHT//2
-background_spring = load_image('map1_spring.png')
+background_spring = load_image('map1_spring_temp.png')
 running = True
 stage = 1
 
@@ -99,9 +99,9 @@ while running:
     
     background_spring.draw(WIDTH//2, HEIGHT//2)
     object_tree_spring.draw(400, 650, 120, 120)
-    fortress.draw(700, 500, 120, 120)
+    fortress.draw(700, 530, 120, 120)
     object_tree_spring.draw(400, 300, 120, 120)
-    fortress.draw(700,200, 120, 120)
+    fortress.draw(700, 190, 120, 120)
     itembox.draw(600, 60, 300 , 140)
     powerup_item.draw(520, 66, 80, 80)
     potion.draw(600, 60, 80, 80)

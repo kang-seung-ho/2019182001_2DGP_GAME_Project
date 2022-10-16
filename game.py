@@ -10,11 +10,15 @@ def handle_events():
     global running
     global dirx
     global diry
+    global character_state
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
             running = False
         elif event.type == SDL_KEYDOWN:
+            if event.key == SDLK_v:
+                character_state = 2
+
             if event.key == SDLK_RIGHT:
                 dirx += 1
             elif event.key == SDLK_LEFT:
@@ -51,19 +55,29 @@ character_state = 0
 
 class monsters:
     def __init__(self):
-        self.x, self.y = 1200, random.randint(20, 600)
-        self.frame = random.randint(0, 7)
+        rand_y = randint(0, 3+1)
+        monster_y = 0
+        if rand_y == 0:
+            monster_y = 650
+        elif rand_y == 1:
+            monster_y == 530
+        elif rand_y ==2:
+            monster_y == 410
+        elif rand_y == 3:
+            monster_y == 290
+
+        self.x, self.y = 1200, monster_y
+        self.frame = 0
         self.image = load_image('goblinsword.png')
 
     def update(self):
         self.frame = (self.frame + 1) % 8
-        self.x += 3
+        self.x += 1
 
     def draw(self):
-        self.image.clip_draw(self.frame*64, 64*2, 64, 64, self.x, self.y, 144, 144)
+        self.image.clip_draw(self.frame*64, 64*2, 64, 64, self.x, self.y, 120, 120)
 
-def character_draw(location, x, y):
-    character.clip_draw()
+
 
 
 round1_monster = [monsters for i in range (20)] #라운드 1에서 몬스터 20마리 출현
@@ -77,6 +91,9 @@ itembox = load_image('itembox.png')
 potion = load_image('potion.png')
 cannon = load_image('cannon.png')
 attack = load_image('gun.png')
+hp = load_image('hp.png')
+character = load_image('character.png')
+
 while running:
     clear_canvas()
     
@@ -90,27 +107,43 @@ while running:
     potion.draw(600, 60, 80, 80)
     cannon.draw(680, 60, 80, 80)
     attack.draw(800, 60, 80, 80)
+    hp.draw(400, 50, 50, 50)
+    hp.draw(350, 50, 50, 50)
+    hp.draw(300, 50, 50, 50)
 
     update_canvas()
     handle_events()
-    frame = (frame + 1) % 8
+    frame = (frame + 1) % 5
     x += dirx * 5
     y += diry * 5
+
     if dirx == 0:
         if character_state == 0:
-            pass
-            # character.clip_draw(frame*, )
+            character.clip_draw(frame * 59, 56*4 , 59, 56, x, y, 120, 120)
         elif character_state == 1:
-            pass
-                
-            # character.clip_draw()
-        frame = (frame + 1) % 8
-        x += dirx * 5
-        y += diry * 5
-        delay(0.01)
+            character.clip_draw(frame * 59, 56*4 , 59, 56, x, y, 120, 120)
+    if dirx > 0 :
+        character.clip_draw(frame * 59, 56*2 , 59, 56, x, y, 120, 120)
+        character_state = 1
+    elif dirx < 0:
+        character.clip_draw(frame * 59, 56*3 , 59, 56, x, y, 120, 120)
+        character_state = 0
 
+    if x > 1220:
+        x = x - dirx*7
+    elif y > 650:
+        y = y - diry*7
+    elif x < 50:
+        x = x - dirx*7
+    elif y < 153:
+        y = y - diry*7
 
     update_canvas()
+                
+    
+    delay(0.07)   
+
+
     handle_events()
 
 

@@ -105,32 +105,35 @@ class character_class:
 
 class monsters:
     def __init__(self):
-        rand_y = randint(0, 3+1)
+        rand_x = random.randint(1300, 1700)
+        rand_y = random.randint(0, 4+1)
         monster_y = 0
         if rand_y == 0:
             monster_y = 650
         elif rand_y == 1:
-            monster_y == 530
+            monster_y = 530
         elif rand_y ==2:
-            monster_y == 410
+            monster_y = 410
         elif rand_y == 3:
-            monster_y == 290
+            monster_y = 300
+        elif rand_y == 4:
+            monster_y = 190
 
-        self.x, self.y = 1200, monster_y
+        self.x, self.y = rand_x, monster_y
         self.frame = 0
         self.image = load_image('goblinsword.png')
 
     def update(self):
-        self.frame = (self.frame + 1) % 8
-        self.x += 1
+        self.frame = random.randint(0, 8)
+        self.x -= 1
 
     def draw(self):
-        self.image.clip_draw(self.frame*64, 64*2, 64, 64, self.x, self.y, 120, 120)
+        self.image.clip_draw(self.frame*64, 64*1, 64, 64, self.x, self.y, 120, 120)
 
 
 
 
-round1_monster = [monsters for i in range (20)] #라운드 1에서 몬스터 20마리 출현
+round1_monster = [monsters() for i in range (20)] #라운드 1에서 몬스터 20마리 출현
 
 # game_framework.run(logo_state)
 
@@ -145,7 +148,7 @@ hp = load_image('hp.png')
 
 
 character = character_class()
-
+monster1 = monsters()
 def object_draw():
     background_spring.draw(WIDTH//2, HEIGHT//2)
     object_tree_spring.draw(400, 650, 120, 120)
@@ -176,8 +179,14 @@ while running:
     object_draw()   
     handle_events()
     character.update()
-    
+    for monsters in round1_monster:
+        monsters.update()
+
     character.draw()
+    
+    for monsters in round1_monster:
+        monsters.draw()
+
 
     update_canvas()
 

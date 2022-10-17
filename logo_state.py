@@ -22,7 +22,7 @@ def update():
 
     if logo_time >= 0.5:
         logo_time = 0
-        game_framework.change_state(title_state)
+        game_framework.change_state(game)
 
 def draw():
     clear_canvas()

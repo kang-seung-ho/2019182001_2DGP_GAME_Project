@@ -16,7 +16,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             running = False
         elif event.type == SDL_KEYDOWN:
-            if event.key == SDLK_v: #공격모션
+            if event.key == SDLK_v:
                 character_state = 2
 
             if event.key == SDLK_RIGHT:
@@ -52,48 +52,6 @@ stage = 1
 
 frame=0
 character_state = 0
-
-class character_class:
-    def __init__(self):
-        
-        self.x, self.y = WIDTH//2, HEIGHT//2
-        self.frame = 0
-        self.character = load_image('character.png')
-        self.hp = 3
-        self.direction = 1
-        self.character_state = 0
-
-    def update(self):
-        global dirx, diry
-        self.frame = (self.frame + 1) % 5
-        self.x += dirx * 5
-        self.y += diry * 5
-
-        if self.x > 1220:
-            self.x = self.x - dirx*7
-        elif self.y > 650:
-            self.y = self.y - diry*7
-        elif self.x < 50:
-            self.x = self.x - dirx*7
-        elif self.y < 153:
-            self.y = self.y - diry*7
-
-    def draw(self):
-        if dirx == 0:
-            if self.character_state == 0:
-                self.character.clip_draw(self.frame * 59, 56*4 , 59, 56, self.x, self.y, 120, 120)
-            elif self.character_state == 1:
-                self.character.clip_draw(self.frame * 59, 56*4 , 59, 56, self.x, self.y, 120, 120)
-        elif dirx > 0 :
-            self.character.clip_draw(self.frame * 59, 56*2 , 59, 56, self.x, self.y, 120, 120)
-            self.character_state = 1
-        elif dirx < 0:
-            self.character.clip_draw(self.frame * 59, 56*3 , 59, 56, self.x, self.y, 120, 120)
-            self.character_state = 0
-
-
-        
-
 
 class monsters:
     def __init__(self):
@@ -134,11 +92,12 @@ potion = load_image('potion.png')
 cannon = load_image('cannon.png')
 attack = load_image('gun.png')
 hp = load_image('hp.png')
+character = load_image('character.png')
+character_hp = 3
 
-
-character = character_class()
-
-def object_draw():
+while running:
+    clear_canvas()
+    
     background_spring.draw(WIDTH//2, HEIGHT//2)
     object_tree_spring.draw(400, 650, 120, 120)
     fortress.draw(700, 530, 120, 120)
@@ -149,31 +108,43 @@ def object_draw():
     potion.draw(600, 60, 80, 80)
     cannon.draw(680, 60, 80, 80)
     attack.draw(800, 60, 80, 80)
-    if character.hp == 3:
+    if character_hp == 3:
         hp.draw(400, 50, 50, 50)
         hp.draw(350, 50, 50, 50)
         hp.draw(300, 50, 50, 50)
-    elif character.hp == 2:
-        hp.draw(400, 50, 50, 50)
-        hp.draw(350, 50, 50, 50)
-    elif character.hp == 1:
-        hp.draw(400, 50, 50, 50)
-    else:
-        game_framework.quit()
-    
-
-while running:
-    clear_canvas()
-    
-    object_draw()   
-    handle_events()
-    character.update()
-    
-    character.draw()
 
     update_canvas()
+    handle_events()
+    frame = (frame + 1) % 5
+    x += dirx * 5
+    y += diry * 5
 
-    delay(0.07)
+    if dirx == 0:
+        if character_state == 0:
+            character.clip_draw(frame * 59, 56*4 , 59, 56, x, y, 120, 120)
+        elif character_state == 1:
+            character.clip_draw(frame * 59, 56*4 , 59, 56, x, y, 120, 120)
+    if dirx > 0 :
+        character.clip_draw(frame * 59, 56*2 , 59, 56, x, y, 120, 120)
+        character_state = 1
+    elif dirx < 0:
+        character.clip_draw(frame * 59, 56*3 , 59, 56, x, y, 120, 120)
+        character_state = 0
+
+    if x > 1220:
+        x = x - dirx*7
+    elif y > 650:
+        y = y - diry*7
+    elif x < 50:
+        x = x - dirx*7
+    elif y < 153:
+        y = y - diry*7
+
+    update_canvas()
+                
+    
+    delay(0.07)   
+
 
     handle_events()
 

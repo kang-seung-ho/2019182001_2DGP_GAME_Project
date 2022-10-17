@@ -11,15 +11,15 @@ def handle_events():
     global dirx
     global diry
     global character_state
+    global attack_state
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
             running = False
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_v: #공격모션
-                character_state = 2
-
-            if event.key == SDLK_RIGHT:
+                attack_state = 1
+            elif event.key == SDLK_RIGHT:
                 dirx += 1
             elif event.key == SDLK_LEFT:
                 dirx -= 1
@@ -30,7 +30,9 @@ def handle_events():
             elif event.key == SDLK_ESCAPE:
                 running = False
         elif event.type == SDL_KEYUP:
-            if event.key == SDLK_RIGHT:
+            if event.key == SDLK_v:
+                attack_state = 0
+            elif event.key == SDLK_RIGHT:
                 dirx -= 1
             elif event.key == SDLK_LEFT:
                 dirx += 1
@@ -52,6 +54,7 @@ stage = 1
 
 frame=0
 character_state = 0
+attack_state = 0
 
 class character_class:
     def __init__(self):
@@ -79,7 +82,12 @@ class character_class:
             self.y = self.y - diry*7
 
     def draw(self):
-        if dirx == 0:
+        if attack_state == 1: #공격키가 눌린 경우.
+            if self.character_state == 0:
+                self.character.clip_draw(self.frame* 59, 56*1, 59, 56, self.x, self.y, 120, 120)
+            elif self.character_state == 1:
+                self.character.clip_draw(self.frame* 59, 56*0, 59, 56, self.x, self.y, 120, 120)
+        elif dirx == 0:
             if self.character_state == 0:
                 self.character.clip_draw(self.frame * 59, 56*4 , 59, 56, self.x, self.y, 120, 120)
             elif self.character_state == 1:
@@ -176,8 +184,6 @@ while running:
     delay(0.07)
 
     handle_events()
-
-
 
 
 

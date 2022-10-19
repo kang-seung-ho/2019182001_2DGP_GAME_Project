@@ -187,7 +187,6 @@ round1_monster = None
 
 
 character = None
-# monster1 = None
 trees = None
 UI = None
 fortress = None
@@ -204,9 +203,6 @@ def enter():
 def update():
     character.update()
     round1_monster.update()
-    
-
-
 
 def exit():
     global character, round1_monster
@@ -221,30 +217,3 @@ def draw():
     UI.draw()
     fortress.draw()
     update_canvas()
-
-
-# while running:
-#     clear_canvas()    
-#     object_draw()   
-#     handle_events()
-#     character.update()
-#     for monsters in round1_monster:
-#         monsters.update()
-
-#     character.draw()
-    
-#     for monsters in round1_monster:
-#         monsters.draw()
-
-
-#     update_canvas()
-
-#     delay(0.07)
-
-#     handle_events()
-
-
-
-
-
-# close_canvas()

@@ -1,10 +1,11 @@
 import pico2d
-import play_state
 import logo_state
 import title_state
+import stage_1
 pico2d.open_canvas()
 start_state = logo_state #모듈을 변수로 취급.
 start_state.enter()
+
 
 # game main loop code
 # while start_state.running:

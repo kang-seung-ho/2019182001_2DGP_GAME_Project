@@ -101,14 +101,14 @@ class character_class:
             self.character_state = 0
 
         if character.hp == 3:
-            self.hp.draw(400, 50, 50, 50)
-            self.hp.draw(350, 50, 50, 50)
-            self.hp.draw(300, 50, 50, 50)
+            self.hp_UI.draw(400, 50, 50, 50)
+            self.hp_UI.draw(350, 50, 50, 50)
+            self.hp_UI.draw(300, 50, 50, 50)
         elif character.hp == 2:
-            self.hp.draw(400, 50, 50, 50)
-            self.hp.draw(350, 50, 50, 50)
+            self.hp_UI.draw(400, 50, 50, 50)
+            self.hp_UI.draw(350, 50, 50, 50)
         elif character.hp == 1:
-            self.hp.draw(400, 50, 50, 50)
+            self.hp_UI.draw(400, 50, 50, 50)
         else:
             pass #타이틀 화면으로 가는 프레임워크 코드 넣기
 
@@ -184,15 +184,13 @@ class UI_DRAWING():
 
 
 round1_monster = None
-
-
 character = None
 trees = None
 UI = None
 fortress = None
 
 def enter():
-    global character, monster1, trees
+    global character, round1_monster, trees, UI, fortress
     character = character_class()
     round1_monster = [monsters() for i in range (20)] #라운드 1에서 몬스터 20마리 출현
     trees = tree_object()
@@ -201,18 +199,23 @@ def enter():
     running = True
 
 def update():
+    global character, round1_monster
     character.update()
-    round1_monster.update()
+    for monsters in round1_monster:
+        monsters.update()
 
 def exit():
+    global character, round1_monster
     global character, round1_monster
     del character
     del round1_monster
 
 def draw():
+    global character, round1_monster, trees, fortress
     clear_canvas()
     character.draw()
-    round1_monster.draw()
+    for monsters in round1_monster:
+        monsters.draw()
     trees.draw()
     UI.draw()
     fortress.draw()

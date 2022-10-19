@@ -1,8 +1,8 @@
 from pico2d import *
 import random
 import game_framework
-# import logo_state
-
+import logo_state
+import title_state
 
 WIDTH, HEIGHT = 1280, 720
 
@@ -28,7 +28,7 @@ def handle_events():
             elif event.key == SDLK_DOWN:
                 diry -= 1
             elif event.key == SDLK_ESCAPE:
-                running = False
+                game_framework.change_state(title_state)
         elif event.type == SDL_KEYUP:
             if event.key == SDLK_v:
                 attack_state = 0
@@ -43,12 +43,12 @@ def handle_events():
 
 
 
-open_canvas(WIDTH, HEIGHT)
+# open_canvas(WIDTH, HEIGHT)
 
 dirx, diry = 0,0
 x = WIDTH//2
 y = HEIGHT//2
-background_spring = load_image('map1_spring_temp.png')
+
 running = True
 stage = 1
 
@@ -65,6 +65,7 @@ class character_class:
         self.hp = 3
         self.direction = 1
         self.character_state = 0
+        self.hp_UI = load_image('hp.png')
 
     def update(self):
         global dirx, diry
@@ -99,6 +100,20 @@ class character_class:
             self.character.clip_draw(self.frame * 59, 56*3 , 59, 56, self.x, self.y, 120, 120)
             self.character_state = 0
 
+        if character.hp == 3:
+            self.hp.draw(400, 50, 50, 50)
+            self.hp.draw(350, 50, 50, 50)
+            self.hp.draw(300, 50, 50, 50)
+        elif character.hp == 2:
+            self.hp.draw(400, 50, 50, 50)
+            self.hp.draw(350, 50, 50, 50)
+        elif character.hp == 1:
+            self.hp.draw(400, 50, 50, 50)
+        else:
+            pass #타이틀 화면으로 가는 프레임워크 코드 넣기
+
+
+
 
         
 
@@ -107,7 +122,7 @@ class monsters:
     def __init__(self):
         rand_x = random.randint(1300, 1700)
         rand_y = random.randint(0, 4+1)
-        monster_y = 0
+        monster_y = 190
         if rand_y == 0:
             monster_y = 650
         elif rand_y == 1:
@@ -118,6 +133,8 @@ class monsters:
             monster_y = 300
         elif rand_y == 4:
             monster_y = 190
+
+        self.hp = 300
 
         self.x, self.y = rand_x, monster_y
         self.frame = 0
@@ -131,71 +148,103 @@ class monsters:
         self.image.clip_draw(self.frame*64, 64*1, 64, 64, self.x, self.y, 120, 120)
 
 
+class tree_object():
+    def __init__(self):
+        self.hp = 200
+        self.object_tree_spring = load_image('tree2.png')
+
+    def draw(self):
+        self.object_tree_spring.draw(400, 650, 120, 120)
+        self.object_tree_spring.draw(400, 300, 120, 120)
+
+class fortess_object():
+    def __init__(self):
+        self.hp = 350
+        self.fortress = load_image('fortress.png')
+
+    def draw(self):
+        self.fortress.draw(700, 530, 120, 120)
+        self.fortress.draw(700, 190, 120, 120)
+
+class UI_DRAWING():
+    def __init__(self):
+        self.background_spring = load_image('map1_spring_temp.png')
+        self.powerup_item = load_image('power_up_arrow.png')
+        self.itembox = load_image('itembox.png')
+        self.potion = load_image('potion.png')
+        self.cannon = load_image('cannon.png')
+        self.attack = load_image('gun.png')
+    def draw(self):
+        self.background_spring.draw(WIDTH//2, HEIGHT//2)
+        self.itembox.draw(600, 60, 300 , 140)
+        self.powerup_item.draw(520, 66, 80, 80)
+        self.potion.draw(600, 60, 80, 80)
+        self.cannon.draw(680, 60, 80, 80)
+        self.attack.draw(800, 60, 80, 80)
 
 
-round1_monster = [monsters() for i in range (20)] #라운드 1에서 몬스터 20마리 출현
-
-# game_framework.run(logo_state)
-
-object_tree_spring = load_image('tree2.png')
-fortress = load_image('fortress.png')
-powerup_item = load_image('power_up_arrow.png')
-itembox = load_image('itembox.png')
-potion = load_image('potion.png')
-cannon = load_image('cannon.png')
-attack = load_image('gun.png')
-hp = load_image('hp.png')
+round1_monster = None
 
 
-character = character_class()
-monster1 = monsters()
-def object_draw():
-    background_spring.draw(WIDTH//2, HEIGHT//2)
-    object_tree_spring.draw(400, 650, 120, 120)
-    fortress.draw(700, 530, 120, 120)
-    object_tree_spring.draw(400, 300, 120, 120)
-    fortress.draw(700, 190, 120, 120)
-    itembox.draw(600, 60, 300 , 140)
-    powerup_item.draw(520, 66, 80, 80)
-    potion.draw(600, 60, 80, 80)
-    cannon.draw(680, 60, 80, 80)
-    attack.draw(800, 60, 80, 80)
-    if character.hp == 3:
-        hp.draw(400, 50, 50, 50)
-        hp.draw(350, 50, 50, 50)
-        hp.draw(300, 50, 50, 50)
-    elif character.hp == 2:
-        hp.draw(400, 50, 50, 50)
-        hp.draw(350, 50, 50, 50)
-    elif character.hp == 1:
-        hp.draw(400, 50, 50, 50)
-    else:
-        game_framework.quit()
-    
+character = None
+# monster1 = None
+trees = None
+UI = None
+fortress = None
 
-while running:
-    clear_canvas()
-    
-    object_draw()   
-    handle_events()
+def enter():
+    global character, monster1, trees
+    character = character_class()
+    round1_monster = [monsters() for i in range (20)] #라운드 1에서 몬스터 20마리 출현
+    trees = tree_object()
+    UI = UI_DRAWING()
+    fortress = fortess_object()
+    running = True
+
+def update():
     character.update()
-    for monsters in round1_monster:
-        monsters.update()
-
-    character.draw()
+    round1_monster.update()
     
-    for monsters in round1_monster:
-        monsters.draw()
 
 
+
+def exit():
+    global character, round1_monster
+    del character
+    del round1_monster
+
+def draw():
+    clear_canvas()
+    character.draw()
+    round1_monster.draw()
+    trees.draw()
+    UI.draw()
+    fortress.draw()
     update_canvas()
 
-    delay(0.07)
 
-    handle_events()
+# while running:
+#     clear_canvas()    
+#     object_draw()   
+#     handle_events()
+#     character.update()
+#     for monsters in round1_monster:
+#         monsters.update()
+
+#     character.draw()
+    
+#     for monsters in round1_monster:
+#         monsters.draw()
+
+
+#     update_canvas()
+
+#     delay(0.07)
+
+#     handle_events()
 
 
 
 
 
-close_canvas()
+# close_canvas()

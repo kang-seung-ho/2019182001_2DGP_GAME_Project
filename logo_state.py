@@ -2,6 +2,8 @@ from pico2d import *
 import game_framework
 import play_state
 import title_state
+import stage_1
+
 # running = True
 image = None
 logo_time = 0.0
@@ -22,7 +24,7 @@ def update():
 
     if logo_time >= 0.5:
         logo_time = 0
-        game_framework.change_state(game)
+        game_framework.change_state(title_state)
 
 def draw():
     clear_canvas()

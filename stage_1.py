@@ -192,7 +192,7 @@ fortress = None
 def enter():
     global character, round1_monster, trees, UI, fortress
     character = character_class()
-    round1_monster = [monsters() for i in range (20)] #라운드 1에서 몬스터 20마리 출현
+    round1_monster = [monsters() for i in range(20)] #라운드 1에서 몬스터 20마리 출현
     trees = tree_object()
     UI = UI_DRAWING()
     fortress = fortess_object()
@@ -205,7 +205,6 @@ def update():
         monsters.update()
 
 def exit():
-    global character, round1_monster
     global character, round1_monster
     del character
     del round1_monster

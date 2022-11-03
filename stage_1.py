@@ -42,9 +42,6 @@ def handle_events():
                 diry += 1
 
 
-
-# open_canvas(WIDTH, HEIGHT)
-
 dirx, diry = 0,0
 x = WIDTH//2
 y = HEIGHT//2
@@ -116,11 +113,6 @@ class character_class:
             pass
 
 
-
-
-        
-
-
 class monsters:
     def __init__(self):
         rand_x = random.randint(1300, 1700)
@@ -157,12 +149,20 @@ class tree_object():
         self.object_tree_spring = load_image('tree2.png')
 
     def draw(self):
-        self.object_tree_spring.draw(400, 650, 120, 120)
         self.object_tree_spring.draw(400, 300, 120, 120)
+
+class tree_object_2():
+    def __init__(self):
+        self.hp = 200
+        self.object_tree_spring = load_image('tree2.png')
+
+    def draw(self):
+        self.object_tree_spring.draw(400, 650, 120, 120)
 
 class fortess_object():
     def __init__(self):
-        self.hp = 350
+        self.hp1 = 350
+        self.hp2 = 350
         self.fortress = load_image('fortress.png')
 
     def draw(self):
@@ -188,15 +188,26 @@ class UI_DRAWING():
 
 round1_monster = None
 character = None
-trees = None
+tree1 = None
+tree2 = None
 UI = None
 fortress = None
 
+
+def pause():
+    pass
+
+def resume():
+    pass
+
 def enter():
-    global character, round1_monster, trees, UI, fortress
+    global character, round1_monster, tree1, tree2, UI, fortress
+    global running
+
     character = character_class()
     round1_monster = [monsters() for i in range(20)] #라운드 1에서 몬스터 20마리 출현
-    trees = tree_object()
+    tree1 = tree_object()
+    tree2 = tree_object_2()
     UI = UI_DRAWING()
     fortress = fortess_object()
     running = True
@@ -204,6 +215,7 @@ def enter():
 def update():
     global character, round1_monster
     character.update()
+
     for monster in round1_monster:
         monster.update()
 
@@ -213,12 +225,13 @@ def exit():
     del round1_monster
 
 def draw():
-    # global character, round1_monster, trees, fortress
+    global character, round1_monster, trees, fortress
     clear_canvas()
     character.draw()
     for monsters in round1_monster:
         monsters.draw()
-    trees.draw()
+    tree1.draw()
+    tree2.draw()
     UI.draw()
     fortress.draw()
     update_canvas()

@@ -179,7 +179,7 @@ class UI_DRAWING():
         self.attack = load_image('gun.png')
     def draw(self):
         self.background_spring.draw(WIDTH//2, HEIGHT//2)
-        self.itembox.draw(600, 60, 300 , 140)
+        self.itembox.draw(600, 60, 300, 140)
         self.powerup_item.draw(520, 66, 80, 80)
         self.potion.draw(600, 60, 80, 80)
         self.cannon.draw(680, 60, 80, 80)
@@ -194,11 +194,7 @@ UI = None
 fortress = None
 
 
-def pause():
-    pass
 
-def resume():
-    pass
 
 def enter():
     global character, round1_monster, tree1, tree2, UI, fortress
@@ -225,7 +221,7 @@ def exit():
     del round1_monster
 
 def draw():
-    global character, round1_monster, trees, fortress
+    global character, round1_monster, tree1, tree2, fortress
     clear_canvas()
     character.draw()
     for monsters in round1_monster:
@@ -235,6 +231,12 @@ def draw():
     UI.draw()
     fortress.draw()
     update_canvas()
+
+def pause():
+    pass
+
+def resume():
+    pass
 
 def test_self():
     import sys

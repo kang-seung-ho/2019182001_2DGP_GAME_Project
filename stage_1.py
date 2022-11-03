@@ -52,7 +52,7 @@ y = HEIGHT//2
 running = True
 stage = 1
 
-frame=0
+frame = 0
 character_state = 0
 attack_state = 0
 
@@ -82,6 +82,9 @@ class character_class:
         elif self.y < 153:
             self.y = self.y - diry*7
 
+        if self.hp <= 0:
+            game_framework.change_state(title_state)
+
     def draw(self):
         if attack_state == 1: #공격키가 눌린 경우.
             if self.character_state == 0:
@@ -93,7 +96,7 @@ class character_class:
                 self.character.clip_draw(self.frame * 59, 56*4 , 59, 56, self.x, self.y, 120, 120)
             elif self.character_state == 1:
                 self.character.clip_draw(self.frame * 59, 56*4 , 59, 56, self.x, self.y, 120, 120)
-        elif dirx > 0 :
+        elif dirx > 0:
             self.character.clip_draw(self.frame * 59, 56*2 , 59, 56, self.x, self.y, 120, 120)
             self.character_state = 1
         elif dirx < 0:
@@ -110,7 +113,7 @@ class character_class:
         elif character.hp == 1:
             self.hp_UI.draw(400, 50, 50, 50)
         else:
-            pass #타이틀 화면으로 가는 프레임워크 코드 넣기
+            pass
 
 
 
@@ -201,8 +204,8 @@ def enter():
 def update():
     global character, round1_monster
     character.update()
-    for monsters in round1_monster:
-        monsters.update()
+    for monster in round1_monster:
+        monster.update()
 
 def exit():
     global character, round1_monster
@@ -210,7 +213,7 @@ def exit():
     del round1_monster
 
 def draw():
-    global character, round1_monster, trees, fortress
+    # global character, round1_monster, trees, fortress
     clear_canvas()
     character.draw()
     for monsters in round1_monster:
@@ -219,3 +222,14 @@ def draw():
     UI.draw()
     fortress.draw()
     update_canvas()
+
+def test_self():
+    import sys
+    this_module = sys.modules['__main__']
+    pico2d.open_canvas(WIDTH, HEIGHT)
+    game_framework.run(this_module)
+    pico2d.close_canvas()
+
+
+if __name__ == '__main__': #만약 단독 실행중이라면,
+    test_self()

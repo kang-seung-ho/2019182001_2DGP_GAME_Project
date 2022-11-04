@@ -152,3 +152,4 @@ class character_class:
 
     def draw(self):
         self.cur_state.draw(self)
+        delay(0.07)

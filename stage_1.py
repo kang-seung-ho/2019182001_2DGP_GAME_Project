@@ -16,7 +16,7 @@ def handle_events():
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
-            running = False
+            game_framework.quit()
         if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
             game_framework.quit()
         else:
@@ -24,7 +24,7 @@ def handle_events():
 
 
 
-dirx, diry = 0,0
+# dirx, diry = 0,0
 x = WIDTH//2
 y = HEIGHT//2
 
@@ -53,13 +53,13 @@ attack_state = 0
 #         self.y += diry * 5
 #
 #         if self.x > 1220:
-#             self.x = self.x - dirx*7
+#             self.x = self.x - dirx*5
 #         elif self.y > 650:
-#             self.y = self.y - diry*7
+#             self.y = self.y - diry*5
 #         elif self.x < 50:
-#             self.x = self.x - dirx*7
+#             self.x = self.x - dirx*5
 #         elif self.y < 153:
-#             self.y = self.y - diry*7
+#             self.y = self.y - diry*5
 #
 #         if self.hp <= 0:
 #             game_framework.change_state(title_state)
@@ -104,7 +104,7 @@ class monsters:
             monster_y = 650
         elif rand_y == 1:
             monster_y = 530
-        elif rand_y ==2:
+        elif rand_y == 2:
             monster_y = 410
         elif rand_y == 3:
             monster_y = 300
@@ -198,9 +198,10 @@ def update():
         monster.update()
 
 def exit():
-    global character, round1_monster
-    del character
-    del round1_monster
+    # global character, round1_monster
+    # del character
+    # del round1_monster
+    pass
 
 def draw():
     global character, round1_monster, tree1, tree2, fortress

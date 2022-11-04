@@ -1,6 +1,7 @@
 from pico2d import *
 import game_framework
 import title_state
+import stage_1
 
 RD, LD, RU, LU, UD, UU, DU, DD, ATTK_D = range(9)
 
@@ -21,6 +22,7 @@ class IDLE:
         self.dirx = 0
         self.diry = 0
     def exit(self):
+        pass
         # del character
     def do(self): #상태에 있을 때 지속적으로 행하는 행위
         self.frame = (self.frame + 1) % 5
@@ -58,8 +60,6 @@ class RUN:
 
     def do(self):
         self.frame = (self.frame + 1) % 5
-        # x 좌표 변경, 달리기
-        self.x += self.dirx
         # self.x = clamp(0, self.x, 700)
 
 
@@ -106,7 +106,7 @@ class ATTACK:
 
 next_state = {
     IDLE: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, UU: RUN, UD: RUN, DD: RUN, DU: RUN, ATTK_D: ATTACK },
-    RUN: {RU: IDLE, LU: IDLE, RD:IDLE, LD: IDLE, ATTK_D: ATTACK },
+    RUN: {RU: IDLE, LU: IDLE, RD: RUN, LD: RUN, UU: RUN, UD: RUN, DD: RUN, DU: RUN, ATTK_D: ATTACK },
     ATTACK: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, UU: RUN, UD: RUN, DD: RUN, DU: RUN}
 }
 
@@ -114,7 +114,7 @@ next_state = {
 
 
 
-class Boy:
+class character_class:
 
     def add_event(self, event):
         self.q.insert(0, event)
@@ -130,7 +130,11 @@ class Boy:
         self.dirx = 0
         self.diry = 0
         self.character_state = 0
-        self.image = load_image('character.png')
+        self.character = load_image('character.png')
+        self.hp_UI = load_image('hp.png')
+        self.hp = 3
+
+
 
         self.q = []  # 이벤트 큐 초기화
         self.cur_state = IDLE

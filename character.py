@@ -2,7 +2,7 @@ from pico2d import *
 import game_framework
 import title_state
 
-RD, LD, RU, LU, UD, UU, DU, DD = range(8)
+RD, LD, RU, LU, UD, UU, DU, DD, ATTK_D = range(9)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RD,
@@ -33,8 +33,7 @@ class IDLE:
 
 
 class RUN:
-    def enter(self, event): #IDLE에서 run으로 들어올때 어떤 키를 눌렀기 때문에 run에 들어왔는지 판단
-        print('ENTER RUN')
+    def enter(self, event):
         if event == RD:
             self.dirx += 1
         elif event == LD:
@@ -87,6 +86,21 @@ class RUN:
             self.character.clip_draw(self.frame * 59, 56 * 3, 59, 56, self.x, self.y, 120, 120)
             self.character_state = 0
 
+
+class ATTACK:
+    def enter(self, event):
+        pass
+
+next_state = {
+    IDLE: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, UU: RUN, UD: RUN, DD: RUN, DU: RUN, ATTK_D: ATTACK },
+    RUN: {RU: IDLE, LU: IDLE, RD:IDLE, LD: IDLE, ATTK_D: ATTACK },
+    ATTACK: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, UU: RUN, UD: RUN, DD: RUN, DU: RUN}
+}
+
+
+
+
+
 class Boy:
 
     def add_event(self, event):
@@ -96,22 +110,6 @@ class Boy:
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
-
-        # if event.type == SDL_KEYDOWN:
-        #     match event.key:
-        #         case pico2d.SDLK_LEFT:
-        #             boy.dir -= 1
-        #         case pico2d.SDLK_RIGHT:
-        #             boy.dir += 1
-        #
-        # elif event.type == SDL_KEYUP:
-        #     match event.key:
-        #         case pico2d.SDLK_LEFT:
-        #             boy.dir += 1
-        #             boy.face_dir = -1
-        #         case pico2d.SDLK_RIGHT:
-        #             boy.dir -= 1
-        #             boy.face_dir = 1
 
     def __init__(self):
         self.x, self.y = 0, 90

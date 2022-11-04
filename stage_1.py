@@ -4,6 +4,7 @@ import game_framework
 import logo_state
 import title_state
 from character import character_class
+from monsters import monster
 
 WIDTH, HEIGHT = 1280, 720
 
@@ -18,7 +19,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
-            game_framework.quit()
+            game_framework.change_state(title_state)
         else:
             character.handle_event(event)
 
@@ -95,34 +96,34 @@ attack_state = 0
 #             pass
 
 
-class monsters:
-    def __init__(self):
-        rand_x = random.randint(1300, 1700)
-        rand_y = random.randint(0, 4+1)
-        monster_y = 190
-        if rand_y == 0:
-            monster_y = 650
-        elif rand_y == 1:
-            monster_y = 530
-        elif rand_y == 2:
-            monster_y = 410
-        elif rand_y == 3:
-            monster_y = 300
-        elif rand_y == 4:
-            monster_y = 190
-
-        self.hp = 300
-
-        self.x, self.y = rand_x, monster_y
-        self.frame = 0
-        self.image = load_image('goblinsword.png')
-
-    def update(self):
-        self.frame = random.randint(0, 8)
-        self.x -= 1
-
-    def draw(self):
-        self.image.clip_draw(self.frame*64, 64*1, 64, 64, self.x, self.y, 120, 120)
+# class monsters:
+#     def __init__(self):
+#         rand_x = random.randint(1300, 1700)
+#         rand_y = random.randint(0, 4+1)
+#         monster_y = 190
+#         if rand_y == 0:
+#             monster_y = 650
+#         elif rand_y == 1:
+#             monster_y = 530
+#         elif rand_y == 2:
+#             monster_y = 410
+#         elif rand_y == 3:
+#             monster_y = 300
+#         elif rand_y == 4:
+#             monster_y = 190
+#
+#         self.hp = 300
+#
+#         self.x, self.y = rand_x, monster_y
+#         self.frame = random.randint(0, 8)
+#         self.image = load_image('goblinsword.png')
+#
+#     def update(self):
+#         self.frame = (self.frame + 1) % 8
+#         self.x -= 1
+#
+#     def draw(self):
+#         self.image.clip_draw(self.frame*64, 64*1, 64, 64, self.x, self.y, 120, 120)
 
 
 class tree_object():
@@ -183,7 +184,7 @@ def enter():
     global running
 
     character = character_class()
-    round1_monster = [monsters() for i in range(20)] #라운드 1에서 몬스터 20마리 출현
+    round1_monster = [monster() for i in range(20)] #라운드 1에서 몬스터 20마리 출현
     tree1 = tree_object()
     tree2 = tree_object_2()
     UI = UI_DRAWING()

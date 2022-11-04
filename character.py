@@ -96,7 +96,7 @@ class ATTACK:
         pass
 
     def do(self):
-        self.frame = (self.frame +1 ) % 8
+        self.frame = (self.frame + 1) % 5
 
     def draw(self):
         if self.character_state == 0:

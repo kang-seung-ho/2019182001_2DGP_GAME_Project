@@ -52,6 +52,7 @@ class RUN:
             self.diry += 1
 
     def exit(self):
+        self.character_state
         #self.face_dir = self.dir #달리고 있다가 나가게 되더라도 현재 방향을 유지하고 나갈 수 있다.
         pass
 
@@ -89,7 +90,19 @@ class RUN:
 
 class ATTACK:
     def enter(self, event):
+        self.attack_state = 1
+
+    def exit(self):
         pass
+
+    def do(self):
+        self.frame = (self.frame +1 ) % 8
+
+    def draw(self):
+        if self.character_state == 0:
+            self.character.clip_draw(self.frame * 59, 56 * 1, 59, 56, self.x, self.y, 120, 120)
+        elif self.character_state == 1:
+            self.character.clip_draw(self.frame * 59, 56 * 0, 59, 56, self.x, self.y, 120, 120)
 
 next_state = {
     IDLE: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, UU: RUN, UD: RUN, DD: RUN, DU: RUN, ATTK_D: ATTACK },
@@ -112,10 +125,12 @@ class Boy:
             self.add_event(key_event)
 
     def __init__(self):
-        self.x, self.y = 0, 90
+        self.x, self.y = 1280//2, 720//2
         self.frame = 0
-        self.dir, self.face_dir = 0, 1
-        self.image = load_image('animation_sheet.png')
+        self.dirx = 0
+        self.diry = 0
+        self.character_state = 0
+        self.image = load_image('character.png')
 
         self.q = []  # 이벤트 큐 초기화
         self.cur_state = IDLE
@@ -124,7 +139,7 @@ class Boy:
     def update(self):
         self.cur_state.do(self)  # 현재 상태의 do액션 수행
 
-        # 이벤트를 확인해서 , 이벤트가 발생했으면,
+        # 이벤트를 확인해서 , 이벤트가 발생했다면.
         if self.q:
             event = self.q.pop()
             self.cur_state.exit(self)  # 현재 상태를 나가야 되고.

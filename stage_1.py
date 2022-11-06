@@ -177,8 +177,6 @@ UI = None
 fortress = None
 
 
-
-
 def enter():
     global character, round1_monster, tree1, tree2, UI, fortress
     global running

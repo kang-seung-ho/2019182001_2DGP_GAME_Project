@@ -3,10 +3,11 @@ import game_framework
 from grass import Grass
 from boy import Boy
 from ui import UI_class
+import game_world
+from ui import background
+
 
 boy = None
-grass = None
-ui = None
 
 
 
@@ -23,25 +24,25 @@ def handle_events():
 
 # 초기화
 def enter():
-    global boy, grass, ui
+    global boy
     boy = Boy()
-    grass = Grass()
     ui = UI_class()
+    background_UI = background()
+    game_world.add_object(background_UI, 0)
+    game_world.add_object(boy, 1)
+    game_world.add_object(ui, 0)
 
 # 종료
 def exit():
-    global boy, grass
-    del boy
-    del grass
-    del ui
+    game_world.clear()
 
 def update():
-    boy.update()
+    for game_object in game_world.all_objects():
+        game_object.update()
 
 def draw_world():
-    grass.draw()
-    boy.draw()
-    ui.draw()
+    for game_object in game_world.all_objects():
+        game_object.draw()
 
 def draw():
     clear_canvas()

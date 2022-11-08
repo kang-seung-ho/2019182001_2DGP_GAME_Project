@@ -1,7 +1,11 @@
 from pico2d import *
+import game_framework
+import game_world
+from bullet import bullets
+import title_state
 
 #이벤트 정의
-RD, LD, RU, LU, AD, AU, UD, DD, UU, DU = range(10)
+RD, LD, RU, LU, ATTK, UD, DD, UU, DU = range(9)
 
 
 key_event_table = {
@@ -9,8 +13,7 @@ key_event_table = {
     (SDL_KEYDOWN, SDLK_LEFT): LD,
     (SDL_KEYUP, SDLK_RIGHT): RU,
     (SDL_KEYUP, SDLK_LEFT): LU,
-    (SDL_KEYDOWN, SDLK_v): AD,
-    (SDL_KEYUP, SDLK_v): AU,
+    (SDL_KEYDOWN, SDLK_v): ATTK,
     (SDL_KEYDOWN, SDLK_DOWN): UD,
     (SDL_KEYDOWN, SDLK_DOWN): DD,
     (SDL_KEYUP, SDLK_UP): UU,
@@ -23,8 +26,11 @@ class IDLE:
         self.dir = 0
 
 
-    def exit(self): 
+    def exit(self, event):
         print('EXIT IDLE')
+        if event == ATTK:
+            self.fire()
+            bullets.draw(self)
         
 
     def do(self): #상태에 있을 때 지속적으로 행하는 행위, 숨쉬기
@@ -60,10 +66,12 @@ class RUN:
             self.diry += 1
 
 
-    def exit(self):
+    def exit(self, event):
         print('EXIT RUN')
         self.face_dir = self.dir #달리고 있다가 나가게 되더라도 현재 방향을 유지하고 나갈 수 있다.
-
+        if event == ATTK:
+            self.fire()
+            bullets.draw(self)
 
     def do(self):
         self.frame = (self.frame + 1) % 5
@@ -117,7 +125,7 @@ class ATTACK:
         elif event == DU:
             self.diry += 1
 
-    def exit(self):
+    def exit(self, event):
         print('EXIT attack')
         self.face_dir = self.dir #달리고 있다가 나가게 되더라도 현재 방향을 유지하고 나갈 수 있다.
 
@@ -137,9 +145,9 @@ class ATTACK:
 
 #상태변환 기술
 next_state = {
-    IDLE: {RU: IDLE, LU: IDLE, RD: RUN, LD: RUN, AD: ATTACK, AU: IDLE, UD: RUN, UU: IDLE, DD: RUN, DU: IDLE},
-    RUN: {RU: IDLE, LU: IDLE, RD:RUN, LD: RUN, AD: ATTACK, AU: IDLE, UD: RUN, UU: IDLE, DD: RUN, DU: IDLE},
-    ATTACK: {RU: IDLE, LU: IDLE, RD: RUN, LD: RUN, AD: ATTACK, AU: IDLE, UD: RUN, UU: IDLE, DD: RUN, DU: IDLE}
+    IDLE: {RU: IDLE, LU: IDLE, RD: RUN, LD: RUN, ATTK: ATTACK, UD: RUN, UU: IDLE, DD: RUN, DU: IDLE},
+    RUN: {RU: IDLE, LU: IDLE, RD:RUN, LD: RUN, ATTK: ATTACK, UD: RUN, UU: IDLE, DD: RUN, DU: IDLE},
+    ATTACK: {RU: IDLE, LU: IDLE, RD: RUN, LD: RUN, ATTK: ATTACK, UD: RUN, UU: IDLE, DD: RUN, DU: IDLE}
 }
 
 
@@ -175,10 +183,15 @@ class Boy:
         #이벤트를 확인해서 , 이벤트가 발생했으면,
         if self.q:
             event = self.q.pop()
-            self.cur_state.exit(self) #현재 상태를 나가야 되고.
+            self.cur_state.exit(self, event) #현재 상태를 나가야 되고.
             self.cur_state = next_state[self.cur_state][event] #다음 상태를 구한다.
             self.cur_state.enter(self, event) #다음 상태의 entry action 수행
         
 
     def draw(self):
         self.cur_state.draw(self)
+
+    def fire(self):
+        print('fire')
+        my_bullet = bullets(self.x, self.y, self.face_dir)
+        game_world.add_object(my_bullet, 1)

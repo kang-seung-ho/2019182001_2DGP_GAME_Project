@@ -1,6 +1,5 @@
 from pico2d import *
 import game_framework
-from grass import Grass
 from boy import Boy
 from ui import UI_class
 import game_world

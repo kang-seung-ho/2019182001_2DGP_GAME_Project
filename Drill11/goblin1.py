@@ -22,9 +22,9 @@ class RUN:
         pass
     def do(self):
         self.frame = self.frame = (self.frame + random.randint(0, 8) + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        self.x += (-1)*RUN_SPEED_PPS*game_framework.frame_time
+        self.x += (-1) * RUN_SPEED_PPS * game_framework.frame_time
 
-        if self.x <=20:
+        if self.x <= 20:
             self.x += 5
 
     def draw(self):
@@ -32,7 +32,7 @@ class RUN:
 
 class goblin:
     def __init__(self):
-        image = load_image('goblinsword.png')
+        self.image = load_image('goblinsword.png')
         self.x = random.randint(1300, 1700)
         rand_y = random.randint(0, 4+1)
         monster_y = 190
@@ -49,9 +49,10 @@ class goblin:
         self.y = monster_y
         self.hp = 300
         self.frame = 0
+        self.cur_state = RUN
 
     def update(self):
-        pass
+        self.cur_state.do(self)
 
     def draw(self):
-        RUN.draw(self)
+        self.RUN.draw(self)

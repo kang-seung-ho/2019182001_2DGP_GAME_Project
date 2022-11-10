@@ -186,8 +186,9 @@ class Boy:
         self.q = [] #이벤트 큐 초기화
         self.cur_state = IDLE
         self.cur_state.enter(self, None) #초기상태의 entry 액션 수행
-        self.hp = 500
+        self.hp = 600
         self.cannon_cnt = 0
+        self.hp_UI = load_image('hp.png')
 
     def update(self):
         self.cur_state.do(self) #현재 상태의 do액션 수행
@@ -205,6 +206,17 @@ class Boy:
 
     def draw(self):
         self.cur_state.draw(self)
+        if self.hp > 400:
+            self.hp_UI.draw(400, 50, 50, 50)
+            self.hp_UI.draw(350, 50, 50, 50)
+            self.hp_UI.draw(300, 50, 50, 50)
+        elif self.hp> 200:
+            self.hp_UI.draw(400, 50, 50, 50)
+            self.hp_UI.draw(350, 50, 50, 50)
+        elif self.hp >= 0:
+            self.hp_UI.draw(400, 50, 50, 50)
+        else:
+            pass
 
     def fire(self):
         print('fire')

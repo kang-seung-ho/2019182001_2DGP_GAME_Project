@@ -5,6 +5,7 @@ from ui import UI_class
 import game_world
 from ui import background
 from goblin1 import goblin
+from fortress import Fortress
 
 boy = None
 
@@ -28,12 +29,16 @@ def enter():
     ui = UI_class()
     background_UI = background()
     goblin_1 = goblin()
+    fortress1 = Fortress(300, 530)
+    fortress2 = Fortress(400, 190)
 
 
     game_world.add_object(background_UI, 0)
     game_world.add_object(boy, 1)
     game_world.add_object(ui, 0)
     game_world.add_object(goblin_1, 1)
+    game_world.add_object(fortress1, 1)
+    game_world.add_object(fortress2, 1)
 
 # 종료
 def exit():

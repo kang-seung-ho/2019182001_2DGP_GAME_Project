@@ -2,12 +2,12 @@ from pico2d import *
 import game_framework
 import game_world
 from bullet import bullets
-import title_state
+# import title_state
 from cannon import Cannon
 
 #이벤트 정의
-RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU, CAND = range(11)
-event_name = ['RD', 'LD', 'RU', 'LU', 'ATTK', 'UD', 'DD', 'UU', 'DU', 'ATTKU', 'CAND']
+RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU, CAND, CANU = range(12)
+event_name = ['RD', 'LD', 'RU', 'LU', 'ATTK', 'UD', 'DD', 'UU', 'DU', 'ATTKU', 'CAND', 'CANU']
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RD, 
@@ -20,7 +20,8 @@ key_event_table = {
     (SDL_KEYUP, SDLK_UP): UU,
     (SDL_KEYUP, SDLK_DOWN): DU,
     (SDL_KEYUP, SDLK_v): ATTKU,
-    (SDL_KEYDOWN, SDLK_c): CAND
+    (SDL_KEYDOWN, SDLK_c): CAND,
+    (SDL_KEYUP, SDLK_c): CANU
 }
 
 class IDLE:
@@ -101,8 +102,8 @@ class RUN:
         elif self.y < 153:
             self.y = self.y + self.diry * 5
 
-        if self.hp <= 0:
-            game_framework.change_state(title_state)
+        # if self.hp <= 0:
+        #     game_framework.change_state(title_state)
 
     def draw(self):
         if self.dir == -1:
@@ -155,9 +156,9 @@ class ATTACK:
 
 #상태변환 기술
 next_state = {
-    IDLE:   {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, UD: RUN, UU: RUN, DD: RUN, DU: RUN, ATTKU: RUN, CAND: RUN},
-    RUN:    {RU: IDLE, LU: IDLE, RD: IDLE, LD: IDLE, ATTK: ATTACK, UD: IDLE, UU: IDLE, DD: IDLE, DU: IDLE, ATTKU: IDLE, CAND: IDLE},
-    ATTACK: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, ATTKU: IDLE, UD: RUN, UU: RUN, DD: RUN, DU: RUN, CAND: RUN}
+    IDLE:   {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, UD: RUN, UU: RUN, DD: RUN, DU: RUN, ATTKU: RUN, CAND: RUN, CANU: RUN},
+    RUN:    {RU: IDLE, LU: IDLE, RD: IDLE, LD: IDLE, ATTK: ATTACK, UD: IDLE, UU: IDLE, DD: IDLE, DU: IDLE, ATTKU: IDLE, CAND: IDLE, CANU: IDLE},
+    ATTACK: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, ATTKU: IDLE, UD: RUN, UU: RUN, DD: RUN, DU: RUN, CAND: RUN, CANU: RUN}
 }
 
 
@@ -207,12 +208,14 @@ class Boy:
 
     def fire(self):
         print('fire')
+        if self.face_dir == 0:
+            self.face_dir = 1
         my_bullet = bullets(self.x, self.y, self.face_dir)
         game_world.add_object(my_bullet, 1)
 
     def install_cannon(self):
         print('install cannon')
-        if self.cannon_cnt >=3 :
+        if self.cannon_cnt >= 3:
             pass
         else:
             self.cannon_cnt += 1

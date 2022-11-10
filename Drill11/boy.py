@@ -3,9 +3,10 @@ import game_framework
 import game_world
 from bullet import bullets
 import title_state
+from cannon import Cannon
 
 #이벤트 정의
-RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU = range(10)
+RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU, CAND = range(11)
 event_name = ['RD', 'LD', 'RU', 'LU', 'ATTK', 'UD', 'DD', 'UU', 'DU', 'ATTKU' ]
 
 key_event_table = {
@@ -18,7 +19,8 @@ key_event_table = {
     (SDL_KEYDOWN, SDLK_DOWN): DD,
     (SDL_KEYUP, SDLK_UP): UU,
     (SDL_KEYUP, SDLK_DOWN): DU,
-    (SDL_KEYUP, SDLK_v): ATTKU
+    (SDL_KEYUP, SDLK_v): ATTKU,
+    (SDL_KEYDOWN, SDLK_c): CAND
 }
 
 class IDLE:
@@ -33,6 +35,9 @@ class IDLE:
         if event == ATTK:
             self.fire()
             bullets.draw(self)
+        elif event == CAND:
+            self.install_cannon()
+            Cannon.draw(self)
         
 
     def do(self): #상태에 있을 때 지속적으로 행하는 행위, 숨쉬기
@@ -74,6 +79,9 @@ class RUN:
         if event == ATTK:
             self.fire()
             bullets.draw(self)
+        elif event == CAND:
+            self.install_cannon()
+            Cannon.draw(self)
 
     def do(self):
         self.frame = (self.frame + 1) % 5
@@ -177,7 +185,8 @@ class Boy:
         self.q = [] #이벤트 큐 초기화
         self.cur_state = IDLE
         self.cur_state.enter(self, None) #초기상태의 entry 액션 수행
-        self.hp = 3
+        self.hp = 500
+        self.cannon_cnt = 0
 
     def update(self):
         self.cur_state.do(self) #현재 상태의 do액션 수행
@@ -200,3 +209,13 @@ class Boy:
         print('fire')
         my_bullet = bullets(self.x, self.y, self.face_dir)
         game_world.add_object(my_bullet, 1)
+
+    def install_cannon(self):
+        print('install cannon')
+        if self.cannon_cnt >=3 :
+            pass
+        else:
+            self.cannon_cnt += 1
+            my_cannon = Cannon(self.x, self.y)
+            game_world.add_object(my_cannon, 1)
+

@@ -1,8 +1,7 @@
 from pico2d import *
 import game_framework
 import game_world
-from bullet import bullets
-import title_state
+from cannon import Cannon
 
 class can_bullet:
     image = None

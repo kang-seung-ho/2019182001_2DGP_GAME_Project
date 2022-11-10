@@ -3,13 +3,13 @@ import game_world
 import game_framework
 import random
 
-TIME_PER_ACTION = 0.5
+TIME_PER_ACTION = 0.3
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 10
 
 
 PIXEL_PER_METER = (10.0/0.3)
-RUN_SPEED_KMPH = 15.0
+RUN_SPEED_KMPH = 7.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -44,4 +44,4 @@ class goblin:
             self.x += 5
 
     def draw(self):
-        self.image.clip_draw(self.frame * 64, 64 * 1, 64, 64, self.x, self.y, 120, 120)
+        self.image.clip_draw(int(self.frame) * 64, 64 * 1, 64, 64, self.x, self.y, 120, 120)

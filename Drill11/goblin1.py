@@ -35,6 +35,7 @@ class goblin:
         self.y = monster_y
         self.hp = 240
         self.frame = 0
+        self.power = 40
 
     def update(self):
         self.frame = self.frame = (self.frame + random.randint(0, 8) + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8

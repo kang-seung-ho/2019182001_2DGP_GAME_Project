@@ -8,6 +8,7 @@ class bullets:
         if bullets.image == None:
             bullets.image = load_image('bullet.png')
         self.x, self.y, self.velocity = x, y, velocity
+        self.power = 35
 
     def draw(self):
         self.image.draw(self.x + 5, self.y, 20, 20)

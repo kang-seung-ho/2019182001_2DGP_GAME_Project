@@ -13,5 +13,6 @@ class Fortress:
         self.image.draw(self.x+10, self.y, 120, 120)
 
     def update(self):
-        pass
+        if self.hp <= 0 :
+            game_world.remove_objects(self)
 

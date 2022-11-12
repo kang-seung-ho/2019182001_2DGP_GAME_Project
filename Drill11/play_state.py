@@ -28,17 +28,19 @@ def enter():
     boy = Boy()
     ui = UI_class()
     background_UI = background()
-    goblin_1 = goblin()
+    # goblin_1 = goblin()
     fortress1 = Fortress(300, 530)
     fortress2 = Fortress(400, 190)
-
+    goblin_crowd = [goblin() for i in range(21)]
 
     game_world.add_object(background_UI, 0)
     game_world.add_object(boy, 1)
     game_world.add_object(ui, 0)
-    game_world.add_object(goblin_1, 1)
+    # game_world.add_object(goblin_1, 1)
     game_world.add_object(fortress1, 1)
     game_world.add_object(fortress2, 1)
+    for i in range(21):
+        game_world.add_object(goblin_crowd[i], 1)
 
 # 종료
 def exit():

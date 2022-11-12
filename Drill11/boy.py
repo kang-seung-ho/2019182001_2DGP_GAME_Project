@@ -190,6 +190,8 @@ class Boy:
         self.cannon_cnt = 0
         self.hp_UI = load_image('hp.png')
 
+
+
     def update(self):
         self.cur_state.do(self) #현재 상태의 do액션 수행
 

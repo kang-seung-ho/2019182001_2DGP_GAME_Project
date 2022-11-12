@@ -10,7 +10,7 @@ class can_bullet:
         if self.image == None:
             self.image = load_image('cannon_bullet.png')
         self.x, self.y, self.velocity = x, y, velocity
-        self.power = 40
+        self.power = 70
 
     def draw(self):
         self.image.draw(self.x + 55, self.y+5, 20, 20)

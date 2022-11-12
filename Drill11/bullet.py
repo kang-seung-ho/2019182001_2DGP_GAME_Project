@@ -10,8 +10,11 @@ class bullets:
         self.x, self.y, self.velocity = x, y, velocity
         self.power = 35
 
+
+
     def draw(self):
         self.image.draw(self.x + 5, self.y, 20, 20)
+
 
     def update(self):
         self.x += self.velocity

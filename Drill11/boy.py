@@ -98,9 +98,9 @@ class RUN:
         elif self.y > 650:
             self.y = self.y - self.diry * 5
         elif self.x < 50:
-            self.x = self.x + self.dir * 5
+            self.x = self.x - self.dir * 5
         elif self.y < 153:
-            self.y = self.y + self.diry * 5
+            self.y = self.y - self.diry * 5
 
         # if self.hp <= 0:
         #     game_framework.change_state(title_state)
@@ -189,8 +189,8 @@ class Boy:
         self.hp = 600
         self.cannon_cnt = 0
         self.hp_UI = load_image('hp.png')
-
-
+        self.fire_sound = load_music('fire_sound.mp3')
+        self.fire_sound.set_volume(100)
 
     def update(self):
         self.cur_state.do(self) #현재 상태의 do액션 수행
@@ -225,6 +225,9 @@ class Boy:
         if self.face_dir == 0:
             self.face_dir = 1
         my_bullet = bullets(self.x, self.y, self.face_dir)
+
+
+        self.fire_sound.play()
         game_world.add_object(my_bullet, 1)
 
     def install_cannon(self):

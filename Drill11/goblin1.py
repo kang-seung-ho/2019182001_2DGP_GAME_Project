@@ -5,7 +5,7 @@ import random
 
 TIME_PER_ACTION = 0.3
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
-FRAMES_PER_ACTION = 10
+FRAMES_PER_ACTION = 8
 
 
 PIXEL_PER_METER = (10.0/0.3)
@@ -43,6 +43,9 @@ class goblin:
 
         if self.x <= 20:
             self.x += 5
+
+        if self.hp <= 0:
+            game_world.remove_objects(self)
 
     def draw(self):
         self.image.clip_draw(int(self.frame) * 64, 64 * 1, 64, 64, self.x, self.y, 120, 120)

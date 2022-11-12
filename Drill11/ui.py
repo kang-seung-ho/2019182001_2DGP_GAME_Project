@@ -7,7 +7,9 @@ class UI_class:
         self.potion = load_image('potion.png')
         self.cannon = load_image('cannon.png')
         self.attack = load_image('gun.png')
-
+        self.bgm = load_music('stage1_main_bgm.mp3')
+        self.bgm.set_volume(50)
+        self.bgm.repeat_play()
 
     def update(self):
         pass

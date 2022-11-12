@@ -7,8 +7,8 @@ from cannon import Cannon
 from ui import UI_class
 
 #이벤트 정의
-RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU, CAND, CANU, HEALD, HEALU = range(14)
-event_name = ['RD', 'LD', 'RU', 'LU', 'ATTK', 'UD', 'DD', 'UU', 'DU', 'ATTKU', 'CAND', 'CANU', 'HEALD', 'HEALU']
+RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU, CAND, CANU, HEALD, HEALU, POWD, POWU = range(16)
+event_name = ['RD', 'LD', 'RU', 'LU', 'ATTK', 'UD', 'DD', 'UU', 'DU', 'ATTKU', 'CAND', 'CANU', 'HEALD', 'HEALU', 'POWD', 'POWU']
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RD, 
@@ -24,7 +24,9 @@ key_event_table = {
     (SDL_KEYDOWN, SDLK_c): CAND,
     (SDL_KEYUP, SDLK_c): CANU,
     (SDL_KEYDOWN, SDLK_x): HEALD,
-    (SDL_KEYUP, SDLK_x): HEALU
+    (SDL_KEYUP, SDLK_x): HEALU,
+    (SDL_KEYDOWN, SDLK_z): POWD,
+    (SDL_KEYUP, SDLK_z): POWU
 }
 
 class IDLE:
@@ -44,6 +46,8 @@ class IDLE:
             Cannon.draw(self)
         elif event == HEALD:
             self.heal()
+        elif event == POWD:
+            self.power_up()
         
 
     def do(self): #상태에 있을 때 지속적으로 행하는 행위, 숨쉬기
@@ -90,6 +94,8 @@ class RUN:
             Cannon.draw(self)
         elif event == HEALD:
             self.heal()
+        elif event == POWD:
+            self.power_up()
 
     def do(self):
         self.frame = (self.frame + 1) % 5
@@ -163,9 +169,9 @@ class ATTACK:
 
 #상태변환 기술
 next_state = {
-    IDLE:   {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, UD: RUN, UU: RUN, DD: RUN, DU: RUN, ATTKU: RUN, CAND: RUN, CANU: RUN, HEALD: RUN, HEALU: RUN},
-    RUN:    {RU: IDLE, LU: IDLE, RD: IDLE, LD: IDLE, ATTK: ATTACK, UD: IDLE, UU: IDLE, DD: IDLE, DU: IDLE, ATTKU: IDLE, CAND: IDLE, CANU: IDLE, HEALD: IDLE, HEALU: IDLE},
-    ATTACK: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, ATTKU: IDLE, UD: RUN, UU: RUN, DD: RUN, DU: RUN, CAND: RUN, CANU: RUN, HEALD: RUN, HEALU: RUN}
+    IDLE:   {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, UD: RUN, UU: RUN, DD: RUN, DU: RUN, ATTKU: RUN, CAND: RUN, CANU: RUN, HEALD: RUN, HEALU: RUN, POWD: RUN, POWU: RUN},
+    RUN:    {RU: IDLE, LU: IDLE, RD: IDLE, LD: IDLE, ATTK: ATTACK, UD: IDLE, UU: IDLE, DD: IDLE, DU: IDLE, ATTKU: IDLE, CAND: IDLE, CANU: IDLE, HEALD: IDLE, HEALU: IDLE, POWD: IDLE, POWU: IDLE},
+    ATTACK: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, ATTKU: IDLE, UD: RUN, UU: RUN, DD: RUN, DU: RUN, CAND: RUN, CANU: RUN, HEALD: RUN, HEALU: RUN, POWD: RUN, POWU: RUN}
 }
 
 
@@ -201,6 +207,9 @@ class Boy:
         self.heal_sound = load_music('heal.mp3')
         self.heal_sound.set_volume(60)
         self.coin = 0
+        self.power = 60
+        self.power_up_sound = load_music('item_use.mp3')
+        self.power_up_sound.set_volume(60)
 
     def update(self):
         self.cur_state.do(self) #현재 상태의 do액션 수행
@@ -261,5 +270,14 @@ class Boy:
         else:
             self.hp += 200
             self.heal_sound.play()
+
+    def power_up(self):
+        if self.power >= 100:
+            pass
+        else:
+            self.power += 20
+            self.power_up_sound.play()
+
+
 
 

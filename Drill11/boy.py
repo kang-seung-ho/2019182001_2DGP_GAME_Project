@@ -4,10 +4,11 @@ import game_world
 from bullet import bullets
 # import title_state
 from cannon import Cannon
+from ui import UI_class
 
 #이벤트 정의
-RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU, CAND, CANU = range(12)
-event_name = ['RD', 'LD', 'RU', 'LU', 'ATTK', 'UD', 'DD', 'UU', 'DU', 'ATTKU', 'CAND', 'CANU']
+RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU, CAND, CANU, HEALD, HEALU = range(14)
+event_name = ['RD', 'LD', 'RU', 'LU', 'ATTK', 'UD', 'DD', 'UU', 'DU', 'ATTKU', 'CAND', 'CANU', 'HEALD', 'HEALU']
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RD, 
@@ -21,7 +22,9 @@ key_event_table = {
     (SDL_KEYUP, SDLK_DOWN): DU,
     (SDL_KEYUP, SDLK_v): ATTKU,
     (SDL_KEYDOWN, SDLK_c): CAND,
-    (SDL_KEYUP, SDLK_c): CANU
+    (SDL_KEYUP, SDLK_c): CANU,
+    (SDL_KEYDOWN, SDLK_x): HEALD,
+    (SDL_KEYUP, SDLK_x): HEALU
 }
 
 class IDLE:
@@ -39,6 +42,8 @@ class IDLE:
         elif event == CAND:
             self.install_cannon()
             Cannon.draw(self)
+        elif event == HEALD:
+            self.heal()
         
 
     def do(self): #상태에 있을 때 지속적으로 행하는 행위, 숨쉬기
@@ -83,6 +88,8 @@ class RUN:
         elif event == CAND:
             self.install_cannon()
             Cannon.draw(self)
+        elif event == HEALD:
+            self.heal()
 
     def do(self):
         self.frame = (self.frame + 1) % 5
@@ -156,9 +163,9 @@ class ATTACK:
 
 #상태변환 기술
 next_state = {
-    IDLE:   {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, UD: RUN, UU: RUN, DD: RUN, DU: RUN, ATTKU: RUN, CAND: RUN, CANU: RUN},
-    RUN:    {RU: IDLE, LU: IDLE, RD: IDLE, LD: IDLE, ATTK: ATTACK, UD: IDLE, UU: IDLE, DD: IDLE, DU: IDLE, ATTKU: IDLE, CAND: IDLE, CANU: IDLE},
-    ATTACK: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, ATTKU: IDLE, UD: RUN, UU: RUN, DD: RUN, DU: RUN, CAND: RUN, CANU: RUN}
+    IDLE:   {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, UD: RUN, UU: RUN, DD: RUN, DU: RUN, ATTKU: RUN, CAND: RUN, CANU: RUN, HEALD: RUN, HEALU: RUN},
+    RUN:    {RU: IDLE, LU: IDLE, RD: IDLE, LD: IDLE, ATTK: ATTACK, UD: IDLE, UU: IDLE, DD: IDLE, DU: IDLE, ATTKU: IDLE, CAND: IDLE, CANU: IDLE, HEALD: IDLE, HEALU: IDLE},
+    ATTACK: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, ATTKU: IDLE, UD: RUN, UU: RUN, DD: RUN, DU: RUN, CAND: RUN, CANU: RUN, HEALD: RUN, HEALU: RUN}
 }
 
 
@@ -190,7 +197,10 @@ class Boy:
         self.cannon_cnt = 0
         self.hp_UI = load_image('hp.png')
         self.fire_sound = load_music('fire_sound.mp3')
-        self.fire_sound.set_volume(100)
+        self.fire_sound.set_volume(70)
+        self.heal_sound = load_music('heal.mp3')
+        self.heal_sound.set_volume(60)
+        self.coin = 0
 
     def update(self):
         self.cur_state.do(self) #현재 상태의 do액션 수행
@@ -208,6 +218,11 @@ class Boy:
 
     def draw(self):
         self.cur_state.draw(self)
+        if self.hp > 600:
+            self.hp_UI.draw(250, 50, 50, 50)
+            self.hp_UI.draw(400, 50, 50, 50)
+            self.hp_UI.draw(350, 50, 50, 50)
+            self.hp_UI.draw(300, 50, 50, 50)
         if self.hp > 400:
             self.hp_UI.draw(400, 50, 50, 50)
             self.hp_UI.draw(350, 50, 50, 50)
@@ -238,4 +253,13 @@ class Boy:
             self.cannon_cnt += 1
             my_cannon = Cannon(self.x, self.y)
             game_world.add_object(my_cannon, 1)
+
+    def heal(self):
+        print('heal')
+        if self.hp > 600:
+            pass
+        else:
+            self.hp += 200
+            self.heal_sound.play()
+
 

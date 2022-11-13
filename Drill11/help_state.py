@@ -3,7 +3,7 @@ import game_framework
 
 def enter(): #객체 생성하는 함수
     global image
-    image = load_image('title.png')
+    image = load_image('help_img.png')
 
 def exit():
     global image

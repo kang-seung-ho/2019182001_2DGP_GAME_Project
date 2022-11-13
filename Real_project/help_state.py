@@ -25,4 +25,4 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             match event.key:
                 case pico2d.SDLK_ESCAPE:
-                    game_framework.pop_state()  # 이전상태인 play_state로 복귀
+                    game_framework.pop_state()

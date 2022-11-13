@@ -6,6 +6,8 @@ import game_world
 from ui import background
 from goblin1 import goblin
 from fortress import Fortress
+import help_state
+import title_state
 
 boy = None
 
@@ -17,7 +19,9 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
-            game_framework.quit()
+            game_framework.change_state(title_state)
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_i):
+            game_framework.push_state(help_state)
         else:
             boy.handle_event(event)
 

@@ -5,6 +5,7 @@ from bullet import bullets
 # import title_state
 from cannon import Cannon
 from ui import UI_class
+import game_over
 
 #이벤트 정의
 RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU, CAND, CANU, HEALD, HEALU, POWD, POWU = range(16)
@@ -52,6 +53,8 @@ class IDLE:
 
     def do(self): #상태에 있을 때 지속적으로 행하는 행위, 숨쉬기
         self.frame = (self.frame + 1) % 5
+        if self.hp <= 0:
+            game_framework.change_state(game_over)
 
     def draw(self):
         if self.face_dir == 1:
@@ -115,8 +118,8 @@ class RUN:
         elif self.y < 153:
             self.y = self.y - self.diry * 5
 
-        # if self.hp <= 0:
-        #     game_framework.change_state(title_state)
+        if self.hp <= 0:
+            game_framework.change_state(game_over)
 
     def draw(self):
         if self.dir == -1:
@@ -155,6 +158,8 @@ class ATTACK:
 
     def do(self):
         self.frame = (self.frame + 1) % 5
+        if self.hp <= 0:
+            game_framework.change_state(game_over)
 
         # self.x += self.dir
         # self.y += self.diry

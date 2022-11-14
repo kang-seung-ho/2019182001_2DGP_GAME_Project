@@ -1,6 +1,7 @@
 from pico2d import *
 import game_framework
 
+image = None
 def enter(): #객체 생성하는 함수
     global image
     image = load_image('help_img.png')

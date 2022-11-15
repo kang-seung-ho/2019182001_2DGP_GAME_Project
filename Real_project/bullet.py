@@ -14,6 +14,7 @@ class bullets:
 
     def draw(self):
         self.image.draw(self.x + 5, self.y, 20, 20)
+        draw_rectangle(*self.get_bb())
 
 
     def update(self):
@@ -21,3 +22,7 @@ class bullets:
 
         if self.x < 25 or self.x > 1270:
             game_world.remove_objects(self)
+
+
+    def get_bb(self):
+        return self.x-8, self.y-10, self.x+15, self.y+10

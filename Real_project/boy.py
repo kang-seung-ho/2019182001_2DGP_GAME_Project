@@ -123,10 +123,10 @@ class RUN:
 
     def draw(self):
         if self.dir == -1:
-            self.image.clip_draw(self.frame * 59, 56 * 3, 59, 56, self.x, self.y, 120, 120)
+            self.image.clip_draw(self.frame * 59, 56 * 3, 59, 56, self.x, self.y+8, 120, 120)
             
         elif self.dir == 1:
-            self.image.clip_draw(self.frame * 59, 56 * 2, 59, 56, self.x, self.y, 120, 120)
+            self.image.clip_draw(self.frame * 59, 56 * 2, 59, 56, self.x, self.y+8, 120, 120)
 
 
 
@@ -166,9 +166,9 @@ class ATTACK:
 
     def draw(self):
         if self.face_dir == 1:
-            self.image.clip_draw(self.frame * 59, 56 * 0, 59, 56, self.x, self.y, 120, 120)            
+            self.image.clip_draw(self.frame * 59, 56 * 0, 59, 56, self.x, self.y+23, 120, 120)
         else:
-            self.image.clip_draw(self.frame * 59, 56 * 1, 59, 56, self.x, self.y, 120, 120)
+            self.image.clip_draw(self.frame * 59, 56 * 1, 59, 56, self.x, self.y+23, 120, 120)
 
 
 
@@ -249,11 +249,13 @@ class Boy:
         else:
             pass
 
+        draw_rectangle(*self.get_bb())
+
     def fire(self):
         print('fire')
         if self.face_dir == 0:
             self.face_dir = 1
-        my_bullet = bullets(self.x, self.y, self.face_dir)
+        my_bullet = bullets(self.x+15, self.y+15, self.face_dir)
 
 
         self.fire_sound.play()
@@ -282,6 +284,11 @@ class Boy:
         else:
             self.power += 20
             self.power_up_sound.play()
+
+
+    #59 * 56
+    def get_bb(self):
+        return self.x-35, self.y-29, self.x+20, self.y+55
 
 
 

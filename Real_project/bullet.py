@@ -26,3 +26,7 @@ class bullets:
 
     def get_bb(self):
         return self.x-8, self.y-10, self.x+15, self.y+10
+
+    def handle_collision(self, other, group):
+        if group == 'bullet:goblin_crowd':
+            game_world.remove_objects(self)

@@ -291,5 +291,7 @@ class Boy:
         return self.x-35, self.y-29, self.x+20, self.y+55
 
 
-
+    def handle_collision(self, other, group):
+        if group == 'bullet:goblin_crowd':
+            game_world.remove_objects(self)
 

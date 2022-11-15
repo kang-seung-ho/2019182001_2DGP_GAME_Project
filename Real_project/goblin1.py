@@ -49,3 +49,7 @@ class goblin:
 
     def draw(self):
         self.image.clip_draw(int(self.frame) * 64, 64 * 1, 64, 64, self.x, self.y, 120, 120)
+        draw_rectangle(*self.get_bb())
+
+    def get_bb(self):
+        return self.x - 35, self.y - 45, self.x + 37, self.y + 53

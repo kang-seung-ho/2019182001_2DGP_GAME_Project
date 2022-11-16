@@ -8,6 +8,7 @@ from goblin1 import goblin
 from fortress import Fortress
 import help_state
 import title_state
+from bullet import bullets
 
 boy = None
 
@@ -25,10 +26,10 @@ def handle_events():
         else:
             boy.handle_event(event)
 
-
+goblin_crowd = None
 # 초기화
 def enter():
-    global boy
+    global boy, goblin_crowd
     boy = Boy()
     ui = UI_class()
     background_UI = background()
@@ -46,6 +47,9 @@ def enter():
     for i in range(21):
         game_world.add_object(goblin_crowd[i], 1)
 
+
+
+
 # 종료
 def exit():
     game_world.clear()
@@ -53,6 +57,7 @@ def exit():
 def update():
     for game_object in game_world.all_objects():
         game_object.update()
+
 
     for a, b, group in game_world.all_collision_pairs():
         if collide(a, b):

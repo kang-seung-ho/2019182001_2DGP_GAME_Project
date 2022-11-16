@@ -53,3 +53,7 @@ class goblin:
 
     def get_bb(self):
         return self.x - 35, self.y - 45, self.x + 37, self.y + 53
+
+    def handle_collision(self, other, group):
+        if group == 'bullet:goblin':
+            game_world.remove_objects(self)

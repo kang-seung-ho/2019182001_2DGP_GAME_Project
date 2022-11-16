@@ -6,6 +6,7 @@ from bullet import bullets
 from cannon import Cannon
 from ui import UI_class
 import game_over
+import play_state
 
 #이벤트 정의
 RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU, CAND, CANU, HEALD, HEALU, POWD, POWU = range(16)
@@ -260,6 +261,8 @@ class Boy:
 
         self.fire_sound.play()
         game_world.add_object(my_bullet, 1)
+        game_world.add_collision_pairs(my_bullet, play_state.goblin_crowd, 'bullets:goblin')
+
 
     def install_cannon(self):
         print('install cannon')
@@ -292,6 +295,6 @@ class Boy:
 
 
     def handle_collision(self, other, group):
-        if group == 'bullet:goblin_crowd':
-            game_world.remove_objects(self)
+        if group == 'boy:goblin':
+            self.hp -= goblin.power
 

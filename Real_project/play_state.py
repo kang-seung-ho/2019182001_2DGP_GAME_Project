@@ -36,7 +36,7 @@ def enter():
     # goblin_1 = goblin()
     fortress1 = Fortress(300, 530)
     fortress2 = Fortress(400, 190)
-    goblin_crowd = [goblin() for i in range(21)]
+    goblin_crowd = [goblin() for i in range(20)]
 
     game_world.add_object(background_UI, 0)
     game_world.add_object(boy, 1)
@@ -44,13 +44,18 @@ def enter():
     # game_world.add_object(goblin_1, 1)
     game_world.add_object(fortress1, 1)
     game_world.add_object(fortress2, 1)
-    for i in range(21):
+    for i in range(20):
         game_world.add_object(goblin_crowd[i], 1)
 
     # game_world.add_collision_pairs(a, b, group)
 
     game_world.add_collision_pairs(boy.my_bullet, goblin_crowd, 'my_bullet:goblin_crowd')
     game_world.add_collision_pairs(boy, goblin_crowd, 'boy:goblin_crowd')
+
+    print(len(goblin_crowd))
+
+
+
 
 # 종료
 def exit():

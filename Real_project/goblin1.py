@@ -20,6 +20,7 @@ hp = 240
 class goblin:
     def __init__(self):
         global power, hp
+
         self.image = load_image('goblinsword.png')
         self.x = random.randint(1300, 1700)
         rand_y = random.randint(0, 4+1)
@@ -50,6 +51,7 @@ class goblin:
 
         if self.hp <= 0:
             game_world.remove_objects(self)
+        self.hp = hp
 
     def draw(self):
         self.image.clip_draw(int(self.frame) * 64, 64 * 1, 64, 64, self.x, self.y, 120, 120)

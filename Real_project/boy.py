@@ -216,6 +216,13 @@ class Boy:
         self.power = 60
         self.power_up_sound = load_music('item_use.mp3')
         self.power_up_sound.set_volume(60)
+        # self.cannon_install_sound = load_music()
+        # self.cannon_install_sound.set_volume(60)
+        self.coin = 50 #적 처치시 코인 획득, 초기 코인 50
+
+        self.font = load_font('game_font.ttf', 20)
+
+
 
     def update(self):
         self.cur_state.do(self) #현재 상태의 do액션 수행
@@ -251,6 +258,7 @@ class Boy:
             game_framework.change_state(game_over)
 
         draw_rectangle(*self.get_bb())
+        self.font.draw(1000, 80, f'({self.coin})', (255, 255, 0))
 
     my_bullet = None
     def fire(self):
@@ -274,6 +282,7 @@ class Boy:
             self.cannon_cnt += 1
             my_cannon = Cannon(self.x, self.y)
             game_world.add_object(my_cannon, 1)
+            # self.cannon_install_sound.play()
 
     def heal(self):
         print('heal')
@@ -299,5 +308,8 @@ class Boy:
     def handle_collision(self, other, group):
         if group == 'boy:goblin_crowd':
             self.hp -= 2
+
+        # if group == 'my_bullet:goblin_crowd':
+        #     goblin1.goblin.hp -= 20
 
 

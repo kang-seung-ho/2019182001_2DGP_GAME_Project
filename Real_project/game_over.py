@@ -32,7 +32,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             match event.key:
                 case pico2d.SDLK_ESCAPE:
-                    game_framework.change_state(title_state)
+                    game_framework.quit()
 
 
 

@@ -14,10 +14,12 @@ RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
-
+power = None
+hp = 240
 
 class goblin:
     def __init__(self):
+        global power, hp
         self.image = load_image('goblinsword.png')
         self.x = random.randint(1300, 1700)
         rand_y = random.randint(0, 4+1)
@@ -34,7 +36,9 @@ class goblin:
             monster_y = 190
         self.y = monster_y
         self.hp = 240
+        self.hp = hp
         self.frame = 0
+        power = 40
         self.power = 40
 
     def update(self):
@@ -52,7 +56,7 @@ class goblin:
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
-        return self.x - 35, self.y - 45, self.x + 37, self.y + 53
+        return self.x - 33, self.y - 45, self.x + 37, self.y + 53
 
     def handle_collision(self, other, group):
         if group == 'bullet:goblin':

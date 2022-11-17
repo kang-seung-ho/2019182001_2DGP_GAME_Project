@@ -47,8 +47,10 @@ def enter():
     for i in range(21):
         game_world.add_object(goblin_crowd[i], 1)
 
+    # game_world.add_collision_pairs(a, b, group)
 
-
+    game_world.add_collision_pairs(boy.my_bullet, goblin_crowd, 'my_bullet:goblin_crowd')
+    game_world.add_collision_pairs(boy, goblin_crowd, 'boy:goblin_crowd')
 
 # 종료
 def exit():

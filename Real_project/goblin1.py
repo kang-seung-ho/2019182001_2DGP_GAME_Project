@@ -70,4 +70,8 @@ class goblin:
     def handle_collision(self, other, group):
         if group == 'boy:goblin_crowd':
             self.RUN_SPEED_PPS = 0
+        elif group == 'fortress1:goblin_crowd':
+            self.RUN_SPEED_PPS = 0
+        elif group == 'fortress2:goblin_crowd':
+            self.RUN_SPEED_PPS = 0
 

@@ -7,12 +7,22 @@ class Fortress:
         self.image = load_image('fortress.png')
         self.x, self.y = x, y
         self.cnt = 0
-        self.hp = 300
+        self.hp = 300.0
 
     def draw(self):
-        self.image.draw(self.x+10, self.y, 120, 120)
+        self.image.draw(self.x, self.y, 120, 120)
+        draw_rectangle(*self.get_bb())
 
     def update(self):
-        if self.hp <= 0 :
+        if self.hp <= 0:
             game_world.remove_objects(self)
 
+    def get_bb(self):
+        return self.x-47, self.y-60, self.x+48, self.y+60
+
+
+    def handle_collision(self, other, group):
+        if group == 'fortress1:goblin_crowd':
+            self.hp -= 0.7
+        elif group == 'fortress2:goblin_crowd':
+            self.hp -= 0.7

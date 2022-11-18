@@ -74,4 +74,8 @@ class goblin:
             self.RUN_SPEED_PPS = 0
         elif group == 'fortress2:goblin_crowd':
             self.RUN_SPEED_PPS = 0
+        elif group == 'tree1:goblin_crowd':
+            self.RUN_SPEED_PPS = 0
+        elif group == 'tree2:goblin_crowd':
+            self.RUN_SPEED_PPS = 0
 

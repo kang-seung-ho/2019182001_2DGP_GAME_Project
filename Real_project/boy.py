@@ -175,11 +175,13 @@ class ATTACK:
 
 #상태변환 기술
 next_state = {
-    IDLE:   {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, ATTKU: RUN, UD: RUN, UU: RUN, DD: RUN, DU: RUN, CAND: RUN, CANU: RUN, HEALD: RUN, HEALU: RUN, POWD: RUN, POWU: RUN},
-    RUN:    {RU: ATTACK, LU: ATTACK, RD: ATTACK, LD: ATTACK, ATTK: ATTACK, ATTKU: IDLE, UD: ATTACK, UU: ATTACK, DD: ATTACK, DU: ATTACK, CAND: IDLE, CANU: IDLE, HEALD: IDLE, HEALU: IDLE, POWD: IDLE, POWU: IDLE},
-    ATTACK: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: RUN, ATTKU: IDLE, UD: RUN, UU: RUN, DD: RUN, DU: RUN, CAND: RUN, CANU: RUN, HEALD: RUN, HEALU: RUN, POWD: RUN, POWU: RUN}
+    IDLE: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, UD: RUN, UU: RUN, DD: RUN, DU: RUN, ATTKU: RUN, CAND: RUN,
+           CANU: RUN, HEALD: RUN, HEALU: RUN, POWD: RUN, POWU: RUN},
+    RUN: {RU: IDLE, LU: IDLE, RD: IDLE, LD: IDLE, ATTK: ATTACK, UD: IDLE, UU: IDLE, DD: IDLE, DU: IDLE, ATTKU: IDLE,
+          CAND: IDLE, CANU: IDLE, HEALD: IDLE, HEALU: IDLE, POWD: IDLE, POWU: IDLE},
+    ATTACK: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, ATTKU: IDLE, UD: RUN, UU: RUN, DD: RUN, DU: RUN,
+             CAND: RUN, CANU: RUN, HEALD: RUN, HEALU: RUN, POWD: RUN, POWU: RUN}
 }
-
 
 
 
@@ -222,7 +224,8 @@ class Boy:
 
         self.font = load_font('game_font.ttf', 60)
 
-
+        self.game_over_sound = load_music('game_over.mp3')
+        self.game_over_sound.set_volume(80)
 
     def update(self):
         self.cur_state.do(self) #현재 상태의 do액션 수행
@@ -255,6 +258,7 @@ class Boy:
         elif self.hp >= 0:
             self.hp_UI.draw(400, 50, 50, 50)
         else:
+            self.game_over_sound.play()
             game_framework.change_state(game_over)
 
         draw_rectangle(*self.get_bb())

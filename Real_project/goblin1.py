@@ -23,9 +23,11 @@ class goblin:
         global power, hp
 
         self.image = load_image('goblinsword.png')
-        self.x = random.randint(1300, 1700)
+        self.x = random.randint(1300, 2200)
+        rand_x = random.randint(200, 400)
+        self.x += rand_x
         rand_y = random.randint(0, 4+1)
-        monster_y = 190
+        monster_y = 180
         if rand_y == 0:
             monster_y = 650
         elif rand_y == 1:
@@ -35,7 +37,19 @@ class goblin:
         elif rand_y == 3:
             monster_y = 300
         elif rand_y == 4:
-            monster_y = 190
+            monster_y = 180
+
+        rand_y = random.randint(0, 4 + 1)
+        if monster_y == 180:
+            if rand_y == 0:
+                monster_y = 650
+            elif rand_y == 1:
+                monster_y = 530
+            elif rand_y == 2:
+                monster_y = 410
+            elif rand_y == 3:
+                monster_y = 300
+
         self.y = monster_y
         self.hp = 240
         self.hp = hp

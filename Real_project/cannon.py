@@ -14,6 +14,7 @@ class Cannon:
 
     def draw(self):
         self.image.draw(self.x+10, self.y, 100, 100)
+        draw_rectangle(*self.get_bb())
 
     def update(self):
         self.end_time = time.time()
@@ -22,3 +23,6 @@ class Cannon:
         if self.cnt % 300 == 0:
             my_can_bullet = can_bullet(self.x, self.y, 1.5)
             game_world.add_object(my_can_bullet, 1)
+
+    def get_bb(self):
+        return self.x - 43, self.y - 47, self.x + 59, self.y + 38

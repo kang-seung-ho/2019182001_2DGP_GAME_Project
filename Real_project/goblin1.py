@@ -51,8 +51,7 @@ class goblin:
         self.frame = self.frame = (self.frame + random.randint(0, 8) + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         if self.state == 'RUN':
             self.x += (-1) * self.RUN_SPEED_PPS * game_framework.frame_time
-        if self.state == 'COLLIDE':
-            pass
+            self.RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
         if self.x <= 20:
             game_framework.change_state(game_over)

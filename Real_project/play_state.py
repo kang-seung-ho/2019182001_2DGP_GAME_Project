@@ -9,6 +9,7 @@ from fortress import Fortress
 import help_state
 import title_state
 from bullet import bullets
+import game_clear
 
 boy = None
 
@@ -54,7 +55,7 @@ def enter():
     game_world.add_collision_pairs(fortress1, goblin_crowd, 'fortress1:goblin_crowd')
     game_world.add_collision_pairs(fortress2, goblin_crowd, 'fortress2:goblin_crowd')
 
-    print(len(goblin_crowd))
+    # print(len(goblin_crowd))
 
 
 
@@ -73,6 +74,10 @@ def update():
             print('COLLISION ', group)
             a.handle_collision(b, group)
             b.handle_collision(a, group)
+
+    monsters_cnt = len(goblin_crowd)
+    if monsters_cnt == 0:
+        game_framework.change_state(game_clear)
 
 def draw_world():
     for game_object in game_world.all_objects():

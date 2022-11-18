@@ -7,7 +7,7 @@ class Fortress:
         self.image = load_image('fortress.png')
         self.x, self.y = x, y
         self.cnt = 0
-        self.hp = 300.0
+        self.hp = 500.0
 
     def draw(self):
         self.image.draw(self.x, self.y, 120, 120)

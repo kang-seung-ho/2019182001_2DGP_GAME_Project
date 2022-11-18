@@ -49,7 +49,7 @@ def enter():
 
     # game_world.add_collision_pairs(a, b, group)
 
-    game_world.add_collision_pairs(boy.my_bullet, goblin_crowd, 'my_bullet:goblin_crowd')
+    # game_world.add_collision_pairs(boy.my_bullet, goblin_crowd, 'my_bullet:goblin_crowd')
     game_world.add_collision_pairs(boy, goblin_crowd, 'boy:goblin_crowd')
 
     print(len(goblin_crowd))

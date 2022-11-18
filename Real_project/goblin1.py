@@ -2,6 +2,7 @@ from pico2d import *
 import game_world
 import game_framework
 import random
+import game_over
 
 TIME_PER_ACTION = 0.3
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
@@ -12,7 +13,7 @@ PIXEL_PER_METER = (10.0/0.2)
 RUN_SPEED_KMPH = 2.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
-RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
+
 
 power = None
 hp = 240
@@ -42,12 +43,19 @@ class goblin:
         power = 40
         self.power = 40
 
+        self.RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
+        # self.state = 'COLLIDE'
+        self.state = 'RUN'
+
     def update(self):
         self.frame = self.frame = (self.frame + random.randint(0, 8) + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        self.x += (-1) * RUN_SPEED_PPS * game_framework.frame_time
+        if self.state == 'RUN':
+            self.x += (-1) * self.RUN_SPEED_PPS * game_framework.frame_time
+        if self.state == 'COLLIDE':
+            pass
 
         if self.x <= 20:
-            self.x += 5
+            game_framework.change_state(game_over)
 
         if self.hp <= 0:
             game_world.remove_objects(self)
@@ -61,5 +69,6 @@ class goblin:
         return self.x - 33, self.y - 45, self.x + 37, self.y + 53
 
     def handle_collision(self, other, group):
-        if group == 'bullet:goblin':
-            game_world.remove_objects(self)
+        if group == 'boy:goblin_crowd':
+            self.RUN_SPEED_PPS = 0
+

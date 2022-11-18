@@ -220,7 +220,7 @@ class Boy:
         # self.cannon_install_sound.set_volume(60)
         self.coin = 50 #적 처치시 코인 획득, 초기 코인 50
 
-        self.font = load_font('game_font.ttf', 20)
+        self.font = load_font('game_font.ttf', 60)
 
 
 
@@ -258,7 +258,7 @@ class Boy:
             game_framework.change_state(game_over)
 
         draw_rectangle(*self.get_bb())
-        self.font.draw(1000, 80, f'({self.coin})', (255, 255, 0))
+        self.font.draw(1000, 80, f'COIN: {self.coin}', (0, 0, 0))
 
     my_bullet = None
     def fire(self):

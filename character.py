@@ -54,7 +54,7 @@ class IDLE:
     def do(self): #상태에 있을 때 지속적으로 행하는 행위, 숨쉬기
         self.frame = (self.frame + 1) % 5
         if self.hp <= 0:
-            game_framework.change_state(game_over)
+            game_framework.change_state(game_over_state)
 
     def draw(self):
         if self.face_dir == 1:
@@ -270,7 +270,7 @@ class Character:
         if self.face_dir == 0:
             self.face_dir = 1
         global my_bullet
-        my_bullet = Bullet(self.x + 15, self.y + 15, self.face_dir)
+        my_bullet = Bullet(self.x + 15, self.y + 15, self.face_dir*2.5)
         game_world.bullet_list.append(my_bullet)
 
         self.fire_sound.play()

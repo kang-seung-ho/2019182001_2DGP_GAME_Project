@@ -61,6 +61,7 @@ def enter():
     game_world.add_collision_pairs(tree1, goblin_crowd, 'tree1:goblin_crowd')
     game_world.add_collision_pairs(tree2, goblin_crowd, 'tree2:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'my_bullet:goblin_crowd')
+    game_world.add_collision_pairs(None, goblin_crowd, 'my_cannon:goblin_crowd')
 
 
 
@@ -88,7 +89,7 @@ def update():
 
     monsters_cnt = len(goblin_crowd)
     if monsters_cnt == 0:
-        game_framework.change_state(game_clear)
+        game_framework.change_state(game_clear_state)
 
 
 

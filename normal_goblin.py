@@ -1,8 +1,11 @@
 from pico2d import *
+
+import character
 import game_world
 import game_framework
 import random
 import game_over_state
+from character import Character
 
 TIME_PER_ACTION = 0.3
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
@@ -90,4 +93,6 @@ class Normal_goblin:
             self.RUN_SPEED_PPS = 0
         elif group == 'my_bullet:goblin_crowd':
             self.hp -= 40
+        elif group == 'my_cannon:goblin_crowd':
+            self.RUN_SPEED_PPS = 0
 

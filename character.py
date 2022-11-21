@@ -6,7 +6,6 @@ from bullet import Bullet
 from cannon import Cannon
 from ui import UI_class
 import game_over_state
-from normal_goblin import Normal_goblin
 
 #이벤트 정의
 RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU, CAND, CANU, HEALD, HEALU, POWD, POWU = range(16)
@@ -214,7 +213,7 @@ class Character:
         self.fire_sound.set_volume(70)
         self.heal_sound = load_music('resources/sound/effect/heal.mp3')
         self.heal_sound.set_volume(60)
-        self.coin = 0
+        self.coin = 50
         self.power = 60
         self.power_up_sound = load_music('resources/sound/effect/power_up.mp3')
         self.power_up_sound.set_volume(60)
@@ -239,7 +238,8 @@ class Character:
             except KeyError:
                 print(self.cur_state, event_name[event])
             self.cur_state.enter(self, event) #다음 상태의 entry action 수행
-        
+
+
 
     def draw(self):
         self.cur_state.draw(self)
@@ -287,6 +287,7 @@ class Character:
             self.cannon_cnt += 1
             my_cannon = Cannon(self.x, self.y)
             game_world.add_object(my_cannon, 1)
+            game_world.add_collision_pairs(my_cannon, None, 'my_cannon:goblin_crowd')
             # self.cannon_install_sound.play()
 
     def heal(self):
@@ -314,7 +315,6 @@ class Character:
         if group == 'boy:goblin_crowd':
             self.hp -= 2
 
-        if group == 'my_bullet:goblin_crowd':
-            Normal_goblin.hp -= 10
+
 
 

@@ -1,7 +1,7 @@
 from pico2d import *
 import game_framework
 import game_world
-from cannon_bullet import can_bullet
+from cannon_bullet import Can_bullet
 import time
 
 
@@ -22,8 +22,9 @@ class Cannon:
         self.delay_time = (self.start_time - self.end_time)
         self.cnt += 1
         if self.cnt % 300 == 0:
-            my_can_bullet = can_bullet(self.x, self.y, 1.5)
-            game_world.add_object(my_can_bullet, 1)
+            cannon_bullet = Can_bullet(self.x, self.y, 1.5)
+            game_world.add_object(cannon_bullet, 1)
+            game_world.add_collision_pairs(cannon_bullet, None, 'cannon_bullet:goblin_crowd')
         if self.hp <= 0:
             game_world.remove_objects(self)
 

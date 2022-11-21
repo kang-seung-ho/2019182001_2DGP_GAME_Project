@@ -95,4 +95,6 @@ class Normal_goblin:
             self.hp -= 40
         elif group == 'my_cannon:goblin_crowd':
             self.RUN_SPEED_PPS = 0
+        elif group == 'cannon_bullet:goblin_crowd':
+            self.hp -= 60
 

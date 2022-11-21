@@ -34,7 +34,6 @@ def enter():
     boy = Character()
     ui = UI_class()
     background_UI = background()
-    # goblin_1 = goblin()
     fortress1 = Fortress(300, 530)
     fortress2 = Fortress(400, 190)
     goblin_crowd = [Normal_goblin() for i in range(20)]
@@ -52,9 +51,6 @@ def enter():
     for i in range(20):
         game_world.add_object(goblin_crowd[i], 1)
 
-    # game_world.add_collision_pairs(a, b, group)
-
-    # game_world.add_collision_pairs(boy.my_bullet, goblin_crowd, 'my_bullet:goblin_crowd')
     game_world.add_collision_pairs(boy, goblin_crowd, 'boy:goblin_crowd')
     game_world.add_collision_pairs(fortress1, goblin_crowd, 'fortress1:goblin_crowd')
     game_world.add_collision_pairs(fortress2, goblin_crowd, 'fortress2:goblin_crowd')
@@ -62,14 +58,7 @@ def enter():
     game_world.add_collision_pairs(tree2, goblin_crowd, 'tree2:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'my_bullet:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'my_cannon:goblin_crowd')
-
-
-
-    # print(len(goblin_crowd))
-    # print(game_world.collision_group)
-
-    game_world.add_collision_pairs(game_world.bullet_list, goblin_crowd, 'bullet_list:goblin_crowd')
-
+    game_world.add_collision_pairs(None, goblin_crowd, 'cannon_bullet:goblin_crowd')
 
 
 # 종료

@@ -1,15 +1,14 @@
 from pico2d import *
 import game_framework
-from boy import Boy
+from character import Character
 from ui import UI_class
 import game_world
 from ui import background
-from goblin1 import goblin
+from normal_goblin import Normal_goblin
 from fortress import Fortress
 import help_state
 import title_state
-from bullet import bullets
-import game_clear
+import game_clear_state
 from tree_spring import Tree
 
 boy = None
@@ -32,13 +31,13 @@ goblin_crowd = None
 # 초기화
 def enter():
     global boy, goblin_crowd
-    boy = Boy()
+    boy = Character()
     ui = UI_class()
     background_UI = background()
     # goblin_1 = goblin()
     fortress1 = Fortress(300, 530)
     fortress2 = Fortress(400, 190)
-    goblin_crowd = [goblin() for i in range(20)]
+    goblin_crowd = [Normal_goblin() for i in range(20)]
     tree1 = Tree(700, 295)
     tree2 = Tree(400, 655)
 
@@ -46,7 +45,6 @@ def enter():
     game_world.add_object(background_UI, 0)
     game_world.add_object(boy, 1)
     game_world.add_object(ui, 0)
-    # game_world.add_object(goblin_1, 1)
     game_world.add_object(fortress1, 1)
     game_world.add_object(fortress2, 1)
     game_world.add_object(tree1, 1)
@@ -62,6 +60,9 @@ def enter():
     game_world.add_collision_pairs(fortress2, goblin_crowd, 'fortress2:goblin_crowd')
     game_world.add_collision_pairs(tree1, goblin_crowd, 'tree1:goblin_crowd')
     game_world.add_collision_pairs(tree2, goblin_crowd, 'tree2:goblin_crowd')
+    game_world.add_collision_pairs(None, goblin_crowd, 'my_bullet:goblin_crowd')
+
+
 
     # print(len(goblin_crowd))
     # print(game_world.collision_group)

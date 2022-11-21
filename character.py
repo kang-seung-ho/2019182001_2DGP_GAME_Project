@@ -1,12 +1,12 @@
 from pico2d import *
 import game_framework
 import game_world
-from bullet import bullets
+from bullet import Bullet
 # import title_state
 from cannon import Cannon
 from ui import UI_class
-import game_over
-from goblin1 import goblin
+import game_over_state
+from normal_goblin import Normal_goblin
 
 #이벤트 정의
 RD, LD, RU, LU, ATTK, UD, DD, UU, DU, ATTKU, CAND, CANU, HEALD, HEALU, POWD, POWU = range(16)
@@ -42,7 +42,7 @@ class IDLE:
         print('EXIT IDLE')
         if event == ATTK:
             self.fire()
-            bullets.draw(self)
+            Bullet.draw(self)
         elif event == CAND:
             self.install_cannon()
             Cannon.draw(self)
@@ -92,7 +92,7 @@ class RUN:
         self.face_dir = self.dir #달리고 있다가 나가게 되더라도 현재 방향을 유지하고 나갈 수 있다.
         if event == ATTK:
             self.fire()
-            bullets.draw(self)
+            Bullet.draw(self)
         elif event == CAND:
             self.install_cannon()
             Cannon.draw(self)
@@ -185,7 +185,7 @@ next_state = {
 
 
 
-class Boy:
+class Character:
 
     def add_event(self, event):
         self.q.insert(0, event)
@@ -259,7 +259,7 @@ class Boy:
             self.hp_UI.draw(400, 50, 50, 50)
         else:
             self.game_over_sound.play()
-            game_framework.change_state(game_over)
+            game_framework.change_state(game_over_state)
 
         draw_rectangle(*self.get_bb())
         self.font.draw(1000, 80, f'COIN: {self.coin}', (0, 0, 0))
@@ -270,12 +270,12 @@ class Boy:
         if self.face_dir == 0:
             self.face_dir = 1
         global my_bullet
-        my_bullet = bullets(self.x+15, self.y+15, self.face_dir)
+        my_bullet = Bullet(self.x + 15, self.y + 15, self.face_dir)
         game_world.bullet_list.append(my_bullet)
 
         self.fire_sound.play()
         game_world.add_object(my_bullet, 1)
-        # game_world.add_collision_pairs(my_bullet, game_world.objects.goblin, 'my_bullet:goblin')
+        game_world.add_collision_pairs(my_bullet, None, 'my_bullet:goblin_crowd')
 
 
 
@@ -315,6 +315,6 @@ class Boy:
             self.hp -= 2
 
         if group == 'my_bullet:goblin_crowd':
-            goblin.hp -= 10
+            Normal_goblin.hp -= 10
 
 

@@ -1,4 +1,4 @@
-from goblin1 import goblin
+from normal_goblin import Normal_goblin
 
 # objects[0]: 바닥계층
 # objects[1]: 상위계층

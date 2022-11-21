@@ -2,12 +2,12 @@ from pico2d import *
 
 class UI_class:
     def __init__(self):
-        self.powerup_item = load_image('power_up_arrow.png')
-        self.itembox = load_image('itembox.png')
-        self.potion = load_image('potion.png')
-        self.cannon = load_image('cannon.png')
-        self.attack = load_image('gun.png')
-        self.bgm = load_music('stage1_main_bgm.mp3')
+        self.powerup_item = load_image('resources/ui/power_up_arrow.png')
+        self.itembox = load_image('resources/ui/itembox.png')
+        self.potion = load_image('resources/ui/potion.png')
+        self.attack = load_image('resources/ui/gun.png')
+        self.cannon = load_image('resources/ui/cannon.png')
+        self.bgm = load_music('resources/sound/bgm/stage1_main_bgm.mp3')
         self.bgm.set_volume(50)
         self.bgm.repeat_play()
 
@@ -18,13 +18,13 @@ class UI_class:
         self.itembox.draw(600, 60, 300, 140)
         self.powerup_item.draw(520, 66, 80, 80)
         self.potion.draw(600, 60, 80, 80)
-        self.cannon.draw(680, 60, 80, 80)
         self.attack.draw(800, 60, 80, 80)
+        self.cannon.draw(680, 60, 80, 80)
 
 
 class background:
     def __init__(self):
-        self.background = load_image('map1_spring.png')
+        self.background = load_image('resources/map/map1_spring.png')
 
     def update(self):
         pass

@@ -7,7 +7,7 @@ import time
 
 class Cannon:
     def __init__(self, x=1280, y=720):
-        self.image = load_image('cannon.png')
+        self.image = load_image('resources/weapon/cannon.png')
         self.x, self.y = x, y
         self.start_time = time.time()
         self.cnt = 0

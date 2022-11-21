@@ -22,7 +22,7 @@ class goblin:
     def __init__(self):
         global power, hp
 
-        self.image = load_image('goblinsword.png')
+        self.image = load_image('resources/sprite_sheet/goblinsword.png')
         self.x = random.randint(1300, 2200)
         rand_x = random.randint(200, 400)
         self.x += rand_x
@@ -92,4 +92,6 @@ class goblin:
             self.RUN_SPEED_PPS = 0
         elif group == 'tree2:goblin_crowd':
             self.RUN_SPEED_PPS = 0
+        elif group == 'bullet_list:goblin_crowd':
+            self.hp -= 2
 

@@ -64,7 +64,9 @@ def enter():
     game_world.add_collision_pairs(tree2, goblin_crowd, 'tree2:goblin_crowd')
 
     # print(len(goblin_crowd))
+    # print(game_world.collision_group)
 
+    game_world.add_collision_pairs(game_world.bullet_list, goblin_crowd, 'bullet_list:goblin_crowd')
 
 
 
@@ -86,6 +88,8 @@ def update():
     monsters_cnt = len(goblin_crowd)
     if monsters_cnt == 0:
         game_framework.change_state(game_clear)
+
+
 
 def draw_world():
     for game_object in game_world.all_objects():

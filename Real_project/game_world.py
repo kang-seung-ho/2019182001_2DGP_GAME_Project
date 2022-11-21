@@ -1,3 +1,5 @@
+from goblin1 import goblin
+
 # objects[0]: 바닥계층
 # objects[1]: 상위계층
 objects = [[], []]
@@ -7,6 +9,7 @@ objects = [[], []]
 
 collision_group = dict()
 
+bullet_list = []
 
 def add_object(o, depth):
     objects[depth].append(o)
@@ -59,3 +62,6 @@ def remove_collision_object(o):
     for pairs in collision_group.values():
         if o in pairs[0]: pairs[0].remove(o)
         elif o in pairs[1]: pairs[1].remove(o)
+
+# def bullet_collision(o):
+#     add_collision_pairs(bullet_list, :)

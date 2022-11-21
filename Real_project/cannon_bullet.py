@@ -8,7 +8,7 @@ class can_bullet:
 
     def __init__(self, x=800, y=300, velocity=1):
         if self.image == None:
-            self.image = load_image('cannon_bullet.png')
+            self.image = load_image('resources/weapon/cannon_bullet.png')
         self.x, self.y, self.velocity = x, y, velocity
         self.power = 70
 

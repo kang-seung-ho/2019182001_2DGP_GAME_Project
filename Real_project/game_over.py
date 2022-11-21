@@ -6,7 +6,7 @@ image = None
 sound = None
 def enter(): #객체 생성하는 함수
     global image, sound
-    image = load_image('game_over_img.png')
+    image = load_image('/resources/system/game_over_img.png')
 
 
 def exit():

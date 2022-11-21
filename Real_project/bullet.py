@@ -6,7 +6,7 @@ class bullets:
 
     def __init__(self, x=800, y=300, velocity=1):
         if bullets.image == None:
-            bullets.image = load_image('bullet.png')
+            bullets.image = load_image('resources/weapon/bullet.png')
         self.x, self.y, self.velocity = x, y, velocity
         # self.power = 35
 
@@ -28,5 +28,5 @@ class bullets:
         return self.x-8, self.y-10, self.x+15, self.y+10
 
     def handle_collision(self, other, group):
-        if group == 'my_bullet:goblin_crowd':
+        if group == 'bullet_list:goblin_crowd':
             game_world.remove_objects(self)

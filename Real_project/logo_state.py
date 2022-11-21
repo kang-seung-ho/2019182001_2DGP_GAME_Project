@@ -8,7 +8,7 @@ logo_time = 0.0
 
 def enter(): #객체 생성하는 함수
     global image
-    image = load_image('tuk_credit.png')
+    image = load_image('resources/system/tuk_credit.png')
 
 def exit():
     global image

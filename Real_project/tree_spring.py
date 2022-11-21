@@ -4,7 +4,7 @@ import game_world
 
 class Tree:
     def __init__(self, x=1280, y=720):
-        self.image = load_image('tree_spring.png')
+        self.image = load_image('resources/stage_object/tree_spring.png')
         self.x, self.y = x, y
         self.cnt = 0
         self.hp = 300.0

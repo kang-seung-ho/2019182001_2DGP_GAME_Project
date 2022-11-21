@@ -202,29 +202,29 @@ class Boy:
         self.dir = 0
         self.face_dir = 1
         self.diry = 0
-        self.image = load_image('character.png')
+        self.image = load_image('resources/sprite_sheet/character.png')
 
         self.q = [] #이벤트 큐 초기화
         self.cur_state = IDLE
         self.cur_state.enter(self, None) #초기상태의 entry 액션 수행
         self.hp = 600
         self.cannon_cnt = 0
-        self.hp_UI = load_image('hp.png')
-        self.fire_sound = load_music('fire_sound.mp3')
+        self.hp_UI = load_image('resources/ui/hp.png')
+        self.fire_sound = load_music('resources/sound/effect/fire_sound.mp3')
         self.fire_sound.set_volume(70)
-        self.heal_sound = load_music('heal.mp3')
+        self.heal_sound = load_music('resources/sound/effect/heal.mp3')
         self.heal_sound.set_volume(60)
         self.coin = 0
         self.power = 60
-        self.power_up_sound = load_music('item_use.mp3')
+        self.power_up_sound = load_music('resources/sound/effect/power_up.mp3')
         self.power_up_sound.set_volume(60)
         # self.cannon_install_sound = load_music()
         # self.cannon_install_sound.set_volume(60)
         self.coin = 50 #적 처치시 코인 획득, 초기 코인 50
 
-        self.font = load_font('game_font.ttf', 60)
+        self.font = load_font('resources/system/game_font.ttf', 60)
 
-        self.game_over_sound = load_music('game_over.mp3')
+        self.game_over_sound = load_music('resources/sound/system/game_over.mp3')
         self.game_over_sound.set_volume(80)
 
     def update(self):
@@ -271,11 +271,12 @@ class Boy:
             self.face_dir = 1
         global my_bullet
         my_bullet = bullets(self.x+15, self.y+15, self.face_dir)
-
+        game_world.bullet_list.append(my_bullet)
 
         self.fire_sound.play()
         game_world.add_object(my_bullet, 1)
-        # game_world.add_collision_pairs(my_bullet, play_state.goblin_crowd, 'bullets:goblin')
+        # game_world.add_collision_pairs(my_bullet, game_world.objects.goblin, 'my_bullet:goblin')
+
 
 
     def install_cannon(self):
@@ -313,7 +314,7 @@ class Boy:
         if group == 'boy:goblin_crowd':
             self.hp -= 2
 
-        # if group == 'my_bullet:goblin_crowd':
-        #     goblin1.goblin.hp -= 20
+        if group == 'my_bullet:goblin_crowd':
+            goblin.hp -= 10
 
 

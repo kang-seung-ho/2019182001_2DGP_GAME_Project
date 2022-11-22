@@ -71,7 +71,7 @@ class Normal_goblin:
             game_framework.change_state(game_over_state)
 
         if self.hp <= 0:
-            game_world.goblin_cnt -= 1
+            game_world.normal_goblin_cnt -= 1
             game_world.remove_objects(self)
 
     def draw(self):

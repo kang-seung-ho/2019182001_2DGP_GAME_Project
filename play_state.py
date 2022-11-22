@@ -77,7 +77,7 @@ def update():
             b.handle_collision(a, group)
 
     monsters_cnt = len(goblin_crowd)
-    if game_world.goblin_cnt == 0:
+    if game_world.normal_goblin_cnt == 0:
         game_framework.change_state(game_clear_state)
 
 

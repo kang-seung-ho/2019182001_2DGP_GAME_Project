@@ -119,14 +119,14 @@ class RUN:
             self.y = self.y - self.diry * 5
 
         if self.hp <= 0:
-            game_framework.change_state(game_over)
+            game_framework.change_state(game_over_state)
 
     def draw(self):
         if self.dir == -1:
-            self.image.clip_draw(self.frame * 59, 56 * 3, 59, 56, self.x, self.y+8, 120, 120)
+            self.image.clip_draw(self.frame * 59, 56 * 3, 59, 56, self.x, self.y+6, 120, 120)
             
         elif self.dir == 1:
-            self.image.clip_draw(self.frame * 59, 56 * 2, 59, 56, self.x, self.y+8, 120, 120)
+            self.image.clip_draw(self.frame * 59, 56 * 2, 59, 56, self.x, self.y+12, 120, 120)
 
 
 

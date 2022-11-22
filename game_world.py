@@ -8,6 +8,7 @@ objects = [[], []]
 collision_group = dict()
 
 bullet_list = []
+goblin_cnt = 20
 
 def add_object(o, depth):
     objects[depth].append(o)

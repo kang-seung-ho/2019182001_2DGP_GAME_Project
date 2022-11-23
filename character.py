@@ -213,13 +213,12 @@ class Character:
         self.fire_sound.set_volume(70)
         self.heal_sound = load_music('resources/sound/effect/heal.mp3')
         self.heal_sound.set_volume(60)
-        self.coin = 50
         self.power = 60
         self.power_up_sound = load_music('resources/sound/effect/power_up.mp3')
         self.power_up_sound.set_volume(60)
         # self.cannon_install_sound = load_music()
         # self.cannon_install_sound.set_volume(60)
-        self.coin = 50 #적 처치시 코인 획득, 초기 코인 50
+        #적 처치시 코인 획득, 초기 코인 50
 
         self.font = load_font('resources/system/game_font.ttf', 60)
 
@@ -262,7 +261,7 @@ class Character:
             game_framework.change_state(game_over_state)
 
         draw_rectangle(*self.get_bb())
-        self.font.draw(1000, 80, f'COIN: {self.coin}', (0, 0, 0))
+        self.font.draw(1000, 80, f'COIN: {game_world.coin}', (0, 0, 0))
 
     my_bullet = None
     def fire(self):

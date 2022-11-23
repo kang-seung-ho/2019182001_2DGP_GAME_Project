@@ -30,7 +30,7 @@ def handle_events():
 goblin_crowd = None
 # 초기화
 def enter():
-    global boy, goblin_crowd
+    global boy, goblin_crowd, font
     boy = Character()
     ui = UI_class()
     background_UI = background()
@@ -59,7 +59,6 @@ def enter():
     game_world.add_collision_pairs(None, goblin_crowd, 'my_bullet:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'my_cannon:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'cannon_bullet:goblin_crowd')
-
 
 # 종료
 def exit():

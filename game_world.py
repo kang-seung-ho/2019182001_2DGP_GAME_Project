@@ -9,6 +9,7 @@ collision_group = dict()
 
 bullet_list = []
 normal_goblin_cnt = 20
+coin = 50
 
 def add_object(o, depth):
     objects[depth].append(o)

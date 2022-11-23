@@ -159,7 +159,7 @@ class ATTACK:
     def do(self):
         self.frame = (self.frame + 1) % 5
         if self.hp <= 0:
-            game_framework.change_state(game_over)
+            game_framework.change_state(game_over_state)
 
         # self.x += self.dir
         # self.y += self.diry
@@ -176,10 +176,10 @@ class ATTACK:
 next_state = {
     IDLE: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, UD: RUN, UU: RUN, DD: RUN, DU: RUN, ATTKU: RUN, CAND: RUN,
            CANU: RUN, HEALD: RUN, HEALU: RUN, POWD: RUN, POWU: RUN},
-    RUN: {RU: IDLE, LU: IDLE, RD: IDLE, LD: IDLE, ATTK: ATTACK, UD: IDLE, UU: IDLE, DD: IDLE, DU: IDLE, ATTKU: IDLE,
+    RUN: {RU: IDLE, LU: IDLE, RD: IDLE, LD: IDLE, ATTK: IDLE, UD: IDLE, UU: IDLE, DD: IDLE, DU: IDLE, ATTKU: IDLE,
           CAND: IDLE, CANU: IDLE, HEALD: IDLE, HEALU: IDLE, POWD: IDLE, POWU: IDLE},
-    ATTACK: {RU: RUN, LU: RUN, RD: RUN, LD: RUN, ATTK: ATTACK, ATTKU: IDLE, UD: RUN, UU: RUN, DD: RUN, DU: RUN,
-             CAND: RUN, CANU: RUN, HEALD: RUN, HEALU: RUN, POWD: RUN, POWU: RUN}
+    ATTACK: {RU: IDLE, LU: IDLE, RD: RUN, LD: RUN, ATTK: ATTACK, ATTKU: IDLE, UD: IDLE, UU: IDLE, DD: IDLE, DU: IDLE,
+             CAND: IDLE, CANU: IDLE, HEALD: IDLE, HEALU: IDLE, POWD: IDLE, POWU: IDLE}
 }
 
 

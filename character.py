@@ -282,27 +282,36 @@ class Character:
         print('install cannon')
         if self.cannon_cnt >= 3:
             pass
+        elif game_world.coin < 50:
+            pass
         else:
             self.cannon_cnt += 1
             my_cannon = Cannon(self.x, self.y)
             game_world.add_object(my_cannon, 1)
             game_world.add_collision_pairs(my_cannon, None, 'my_cannon:goblin_crowd')
+            game_world.coin -= 50
             # self.cannon_install_sound.play()
 
     def heal(self):
         print('heal')
         if self.hp > 600:
             pass
+        elif game_world.coin < 50:
+            pass
         else:
             self.hp += 200
             self.heal_sound.play()
+            game_world.coin -= 40
 
     def power_up(self):
         if self.power >= 100:
             pass
+        elif game_world.coin < 50:
+            pass
         else:
             self.power += 20
             self.power_up_sound.play()
+            game_world.coin -= 20
 
 
     #59 * 56

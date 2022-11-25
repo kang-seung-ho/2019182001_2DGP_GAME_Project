@@ -308,10 +308,12 @@ class Character:
             pass
         elif game_world.coin < 50:
             pass
+        elif game_world.character_power >= 100:
+            pass
         else:
-            self.power += 20
             self.power_up_sound.play()
             game_world.coin -= 20
+            game_world.character_power += 20
 
 
     #59 * 56

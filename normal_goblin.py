@@ -99,7 +99,7 @@ class Normal_goblin:
             self.RUN_SPEED_PPS = 0
         elif group == 'my_bullet:goblin_crowd':
             self.state = 'ATTACKED'
-            self.hp -= 40
+            self.hp -= game_world.character_power
         elif group == 'my_cannon:goblin_crowd':
             self.RUN_SPEED_PPS = 0
         elif group == 'cannon_bullet:goblin_crowd':

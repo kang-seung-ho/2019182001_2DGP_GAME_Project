@@ -8,7 +8,7 @@ from normal_goblin import Normal_goblin
 from fortress import Fortress
 import help_state
 import title_state
-import first_game_clear_state
+import third_game_clear_state
 from tree_spring import Tree
 
 boy = None
@@ -63,7 +63,7 @@ def enter():
     game_world.add_collision_pairs(None, goblin_crowd, 'my_bullet:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'my_cannon:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'cannon_bullet:goblin_crowd')
-    print('second play state')
+    print('third play state')
 
 # 종료
 def exit():
@@ -82,7 +82,7 @@ def update():
 
     monsters_cnt = len(goblin_crowd)
     if game_world.normal_goblin_cnt == 0:
-        game_framework.change_state(second_game_clear_state)
+        game_framework.change_state(third_game_clear_state)
 
 
 

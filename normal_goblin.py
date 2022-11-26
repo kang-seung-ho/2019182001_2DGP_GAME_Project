@@ -26,7 +26,7 @@ class Normal_goblin:
 
         self.image = load_image('resources/sprite_sheet/goblinsword.png')
         self.attacked = load_image('resources/sprite_sheet/goblinsword_attacked.png')
-        self.x = random.randint(1300, 2200)
+        self.x = random.randint(1300, 2000)
         rand_x = random.randint(200, 400)
         self.x += rand_x
         rand_y = random.randint(0, 4+1)

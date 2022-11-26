@@ -1,4 +1,5 @@
 from pico2d import *
+import game_world
 
 class UI_class:
     def __init__(self):
@@ -24,7 +25,12 @@ class UI_class:
 
 class background:
     def __init__(self):
-        self.background = load_image('resources/map/map1_spring.png')
+        if game_world.background_state == 'spring':
+            self.background = load_image('resources/map/map1_spring.png')
+        elif game_world.background_state == 'summer':
+            self.background = load_image('resources/map/map2_summer.png')
+        elif game_world.background_state == 'winter':
+            self.background = load_image('resources/map/map3_winter.png')
 
     def update(self):
         pass

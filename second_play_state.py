@@ -8,8 +8,8 @@ from normal_goblin import Normal_goblin
 from fortress import Fortress
 import help_state
 import title_state
-import first_game_clear_state
 from tree_spring import Tree
+import second_game_clear_state
 
 boy = None
 
@@ -30,13 +30,15 @@ def handle_events():
 goblin_crowd = None
 # 초기화
 def enter():
+    game_world.background_state = 'summer'
     global boy, goblin_crowd, font
     boy = Character()
     ui = UI_class()
     background_UI = background()
     fortress1 = Fortress(300, 530)
     fortress2 = Fortress(400, 190)
-    goblin_crowd = [Normal_goblin() for i in range(20)]
+    fortress3 = Fortress(600, 190)
+    goblin_crowd = [Normal_goblin() for i in range(30)]
     tree1 = Tree(700, 295)
     tree2 = Tree(400, 655)
 
@@ -46,19 +48,22 @@ def enter():
     game_world.add_object(ui, 0)
     game_world.add_object(fortress1, 1)
     game_world.add_object(fortress2, 1)
+    game_world.add_object(fortress3, 1)
     game_world.add_object(tree1, 1)
     game_world.add_object(tree2, 1)
-    for i in range(20):
+    for i in range(30):
         game_world.add_object(goblin_crowd[i], 1)
 
     game_world.add_collision_pairs(boy, goblin_crowd, 'boy:goblin_crowd')
     game_world.add_collision_pairs(fortress1, goblin_crowd, 'fortress1:goblin_crowd')
     game_world.add_collision_pairs(fortress2, goblin_crowd, 'fortress2:goblin_crowd')
+    game_world.add_collision_pairs(fortress3, goblin_crowd, 'fortress2:goblin_crowd')
     game_world.add_collision_pairs(tree1, goblin_crowd, 'tree1:goblin_crowd')
     game_world.add_collision_pairs(tree2, goblin_crowd, 'tree2:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'my_bullet:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'my_cannon:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'cannon_bullet:goblin_crowd')
+    print('second play state')
 
 # 종료
 def exit():
@@ -75,9 +80,8 @@ def update():
             a.handle_collision(b, group)
             b.handle_collision(a, group)
 
-    monsters_cnt = len(goblin_crowd)
-    if game_world.normal_goblin_cnt == 0:
-        game_framework.change_state(first_game_clear_state)
+    if game_world.second_state_normal_goblin_cnt == 0:
+        game_framework.change_state(second_game_clear_state)
 
 
 
@@ -106,16 +110,3 @@ def collide(a, b):
     if ba > tb: return False
 
     return True
-
-
-
-
-def test_self():
-    import play_state
-
-    pico2d.open_canvas(1280, 720)
-    game_framework.run(play_state)
-    pico2d.clear_canvas()
-
-if __name__ == '__main__':
-    test_self()

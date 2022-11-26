@@ -38,7 +38,7 @@ def enter():
     fortress1 = Fortress(300, 530)
     fortress2 = Fortress(400, 190)
     fortress3 = Fortress(600, 190)
-    goblin_crowd = [Normal_goblin() for i in range(20)]
+    goblin_crowd = [Normal_goblin() for i in range(40)]
     tree1 = Tree(700, 295)
     tree2 = Tree(400, 655)
 
@@ -51,7 +51,7 @@ def enter():
     game_world.add_object(fortress3, 1)
     game_world.add_object(tree1, 1)
     game_world.add_object(tree2, 1)
-    for i in range(20):
+    for i in range(40):
         game_world.add_object(goblin_crowd[i], 1)
 
     game_world.add_collision_pairs(boy, goblin_crowd, 'boy:goblin_crowd')
@@ -81,8 +81,8 @@ def update():
             b.handle_collision(a, group)
 
     monsters_cnt = len(goblin_crowd)
-    # if game_world.normal_goblin_cnt == 0:
-    #     game_framework.change_state(second_game_clear_state)
+    if game_world.normal_goblin_cnt == 0:
+        game_framework.change_state(second_game_clear_state)
 
 
 

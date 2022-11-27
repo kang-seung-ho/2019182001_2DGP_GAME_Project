@@ -10,6 +10,7 @@ import help_state
 import title_state
 import first_game_clear_state
 from tree_spring import Tree
+from boss_monster import Boss_monster
 
 boy = None
 
@@ -39,6 +40,7 @@ def enter():
     goblin_crowd = [Normal_goblin() for i in range(20)]
     tree1 = Tree(700, 295)
     tree2 = Tree(400, 655)
+    boss = Boss_monster()
 
 
     game_world.add_object(background_UI, 0)
@@ -48,6 +50,7 @@ def enter():
     game_world.add_object(fortress2, 1)
     game_world.add_object(tree1, 1)
     game_world.add_object(tree2, 1)
+    game_world.add_object(boss, 1)
     for i in range(20):
         game_world.add_object(goblin_crowd[i], 1)
 

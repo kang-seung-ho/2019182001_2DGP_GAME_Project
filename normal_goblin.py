@@ -1,11 +1,9 @@
 from pico2d import *
 
-import character
 import game_world
 import game_framework
 import random
 import game_over_state
-from character import Character
 
 TIME_PER_ACTION = 0.3
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION

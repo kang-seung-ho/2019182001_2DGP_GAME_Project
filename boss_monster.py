@@ -66,23 +66,23 @@ class Boss_monster:
     def get_bb(self):
         return self.x - 92, self.y - 75, self.x + 85, self.y + 55
 
-    # def handle_collision(self, other, group):
-    #     if group == 'boy:goblin_crowd':
-    #         self.RUN_SPEED_PPS = 0
-    #     elif group == 'fortress1:goblin_crowd':
-    #         self.RUN_SPEED_PPS = 0
-    #     elif group == 'fortress2:goblin_crowd':
-    #         self.RUN_SPEED_PPS = 0
-    #     elif group == 'tree1:goblin_crowd':
-    #         self.RUN_SPEED_PPS = 0
-    #     elif group == 'tree2:goblin_crowd':
-    #         self.RUN_SPEED_PPS = 0
-    #     elif group == 'my_bullet:goblin_crowd':
-    #         self.state = 'ATTACKED'
-    #         self.hp -= game_world.character_power
-    #     elif group == 'my_cannon:goblin_crowd':
-    #         self.RUN_SPEED_PPS = 0
-    #     elif group == 'cannon_bullet:goblin_crowd':
-    #         self.state = 'ATTACKED'
-    #         self.hp -= 60
+    def handle_collision(self, other, group):
+        if group == 'boy:boss':
+            self.RUN_SPEED_PPS = 0
+        elif group == 'fortress1:boss':
+            self.RUN_SPEED_PPS = 0
+        elif group == 'fortress2:boss':
+            self.RUN_SPEED_PPS = 0
+        elif group == 'tree1:boss':
+            self.RUN_SPEED_PPS = 0
+        elif group == 'tree2:boss':
+            self.RUN_SPEED_PPS = 0
+        elif group == 'my_bullet:boss':
+            self.state = 'ATTACKED'
+            self.hp -= game_world.character_power
+        elif group == 'my_cannon:boss':
+            self.RUN_SPEED_PPS = 0
+        elif group == 'cannon_bullet:boss':
+            self.state = 'ATTACKED'
+            self.hp -= 60
 

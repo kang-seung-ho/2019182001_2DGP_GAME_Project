@@ -29,6 +29,7 @@ def handle_events():
             boy.handle_event(event)
 
 goblin_crowd = None
+bossmonster_condition = 0
 # 초기화
 def enter():
     global boy, goblin_crowd, font
@@ -40,7 +41,7 @@ def enter():
     goblin_crowd = [Normal_goblin() for i in range(20)]
     tree1 = Tree(700, 295)
     tree2 = Tree(400, 655)
-    boss = Boss_monster()
+
 
 
     game_world.add_object(background_UI, 0)
@@ -50,7 +51,6 @@ def enter():
     game_world.add_object(fortress2, 1)
     game_world.add_object(tree1, 1)
     game_world.add_object(tree2, 1)
-    game_world.add_object(boss, 1)
     for i in range(20):
         game_world.add_object(goblin_crowd[i], 1)
 
@@ -77,8 +77,14 @@ def update():
             print('COLLISION ', group)
             a.handle_collision(b, group)
             b.handle_collision(a, group)
+    global bossmonster_condition
+    if game_world.normal_goblin_cnt == 10 and bossmonster_condition == 0:
+        bossmonster_condition += 1
+        boss = Boss_monster()
+        game_world.add_object(boss, 1)
+        game_world.add_collision_pairs(None, boss, 'cannon_bullet:boss')
 
-    monsters_cnt = len(goblin_crowd)
+
     if game_world.normal_goblin_cnt == 0:
         game_framework.change_state(first_game_clear_state)
 

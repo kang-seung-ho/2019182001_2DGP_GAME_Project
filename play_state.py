@@ -82,7 +82,7 @@ def update():
         bossmonster_condition += 1
         boss = Boss_monster()
         game_world.add_object(boss, 1)
-        game_world.add_collision_pairs(None, boss, 'cannon_bullet:boss')
+        game_world.add_collision_pairs(None, boss, 'my_bullet:boss')
 
 
     if game_world.normal_goblin_cnt == 0:

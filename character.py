@@ -275,6 +275,7 @@ class Character:
         self.fire_sound.play()
         game_world.add_object(my_bullet, 1)
         game_world.add_collision_pairs(my_bullet, None, 'my_bullet:goblin_crowd')
+        game_world.add_collision_pairs(my_bullet, None, 'my_bullet:boss')
 
 
 
@@ -289,6 +290,7 @@ class Character:
             my_cannon = Cannon(self.x, self.y)
             game_world.add_object(my_cannon, 1)
             game_world.add_collision_pairs(my_cannon, None, 'my_cannon:goblin_crowd')
+            game_world.add_collision_pairs(my_cannon, None, 'my_cannon:boss')
             game_world.coin -= 50
             # self.cannon_install_sound.play()
 

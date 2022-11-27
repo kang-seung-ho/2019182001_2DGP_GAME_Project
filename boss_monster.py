@@ -29,7 +29,8 @@ class Boss_monster:
         # self.attacked = load_image('resources/sprite_sheet/goblinsword_attacked.png')
         self.x = random.randint(1300, 2000)
 
-        self.x = 1100
+        self.x = 1400
+        self.x = 1200
         self.y = 720//2
         self.hp = 2000
         self.frame = 0
@@ -78,7 +79,7 @@ class Boss_monster:
         elif group == 'tree2:boss':
             self.RUN_SPEED_PPS = 0
         elif group == 'my_bullet:boss':
-            self.state = 'ATTACKED'
+            # self.state = 'ATTACKED'
             self.hp -= game_world.character_power
         elif group == 'my_cannon:boss':
             self.RUN_SPEED_PPS = 0

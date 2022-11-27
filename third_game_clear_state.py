@@ -7,7 +7,7 @@ image = None
 sound = None
 def enter(): #객체 생성하는 함수
     global image, sound
-    image = load_image('resources/system/game_clear.png')
+    image = load_image('resources/system/final_game_clear.png')
     sound = load_music('resources/sound/system/stage_clear.mp3')
     sound.set_volume(70)
 

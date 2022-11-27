@@ -24,6 +24,12 @@ class Normal_goblin:
     def __init__(self):
         global power, hp
 
+        self.randnum = random.randint(1, 10000) % 8
+        if self.randnum == 0:
+            self.RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER) * 2
+        else:
+            self.RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
+
         self.image = load_image('resources/sprite_sheet/goblinsword.png')
         self.attacked = load_image('resources/sprite_sheet/goblinsword_attacked.png')
         self.x = random.randint(1300, 2000)
@@ -58,14 +64,18 @@ class Normal_goblin:
         self.frame = 0
         self.power = 40
 
-        self.RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
+
         self.state = 'RUN'
 
 
     def update(self):
         self.frame = self.frame = (self.frame + random.randint(0, 8) + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 5
         self.x += (-1) * self.RUN_SPEED_PPS * game_framework.frame_time
-        self.RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
+        if self.randnum == 0:
+            self.RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER) * 2
+        else:
+            self.RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
+
         if self.x <= 20:
             game_framework.change_state(game_over_state)
 
@@ -80,6 +90,7 @@ class Normal_goblin:
         elif self.state == 'ATTACKED':
             self.attacked.clip_draw(int(self.frame) * 64, 64 * 1, 64, 64, self.x, self.y, 120, 120)
             self.state = 'RUN'
+
 
         draw_rectangle(*self.get_bb())
 

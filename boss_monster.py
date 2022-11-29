@@ -52,6 +52,7 @@ class Boss_monster:
             game_world.first_boss_cnt -= 1
             game_world.coin += 10
             game_world.remove_objects(self)
+            game_world.remove_collision_object(self)
 
     def draw(self):
         if self.state == 'RUN':

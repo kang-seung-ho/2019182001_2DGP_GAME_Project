@@ -35,3 +35,5 @@ class Cannon:
     def handle_collision(self, other, group):
         if group == 'my_cannon:goblin_crowd':
             self.hp -= 1
+        elif group == 'my_cannon:boss':
+            self.hp -= 2

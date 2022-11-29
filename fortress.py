@@ -16,6 +16,7 @@ class Fortress:
     def update(self):
         if self.hp <= 0:
             game_world.remove_objects(self)
+            game_world.remove_collision_object(self)
 
     def get_bb(self):
         return self.x-47, self.y-60, self.x+48, self.y+60
@@ -26,3 +27,7 @@ class Fortress:
             self.hp -= 0.7
         elif group == 'fortress2:goblin_crowd':
             self.hp -= 0.7
+        elif group == 'fortress1:boss':
+            self.hp -= 1
+        elif group == 'fortress2:boss':
+            self.hp -= 1

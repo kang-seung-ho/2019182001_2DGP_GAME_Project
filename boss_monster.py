@@ -56,9 +56,9 @@ class Boss_monster:
     def draw(self):
         if self.state == 'RUN':
             self.image.clip_draw(int(self.frame) * 184, 226 * 1, 184, 184, self.x, self.y, 200, 200)
-        # elif self.state == 'ATTACKED':
-        #     self.attacked.clip_draw(int(self.frame) * 64, 64 * 1, 64, 64, self.x, self.y, 120, 120)
-        #     self.state = 'RUN'
+        elif self.state == 'ATTACK':
+            self.image.clip_draw(int(self.frame) * 183, 226 * 0, 183, 184, self.x, self.y, 200, 200)
+            self.state = 'RUN'
 
 
         draw_rectangle(*self.get_bb())
@@ -69,20 +69,23 @@ class Boss_monster:
     def handle_collision(self, other, group):
         if group == 'boy:boss':
             self.RUN_SPEED_PPS = 0
+            self.state = 'ATTACK'
         elif group == 'fortress1:boss':
             self.RUN_SPEED_PPS = 0
+            self.state = 'ATTACK'
         elif group == 'fortress2:boss':
             self.RUN_SPEED_PPS = 0
+            self.state = 'ATTACK'
         elif group == 'tree1:boss':
             self.RUN_SPEED_PPS = 0
+            self.state = 'ATTACK'
         elif group == 'tree2:boss':
             self.RUN_SPEED_PPS = 0
+            self.state = 'ATTACK'
         elif group == 'my_bullet:boss':
-            # self.state = 'ATTACKED'
             self.hp -= game_world.character_power
         elif group == 'my_cannon:boss':
             self.RUN_SPEED_PPS = 0
         elif group == 'cannon_bullet:boss':
-            self.state = 'ATTACKED'
             self.hp -= 60
 

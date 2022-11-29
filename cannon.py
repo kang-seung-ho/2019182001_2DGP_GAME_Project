@@ -25,6 +25,7 @@ class Cannon:
             cannon_bullet = Can_bullet(self.x, self.y, 1.5)
             game_world.add_object(cannon_bullet, 1)
             game_world.add_collision_pairs(cannon_bullet, None, 'cannon_bullet:goblin_crowd')
+            game_world.add_collision_pairs(cannon_bullet, None, 'cannon_bullet:boss')
         if self.hp <= 0:
             game_world.remove_objects(self)
 

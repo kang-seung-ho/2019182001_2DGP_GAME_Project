@@ -30,7 +30,6 @@ class Boss_monster:
         self.x = random.randint(1300, 2000)
 
         self.x = 1400
-        self.x = 1200
         self.y = 720//2
         self.hp = 2000
         self.frame = 0
@@ -50,7 +49,7 @@ class Boss_monster:
             game_framework.change_state(game_over_state)
 
         if self.hp <= 0:
-            game_world.normal_goblin_cnt -= 1
+            game_world.first_boss_cnt -= 1
             game_world.coin += 10
             game_world.remove_objects(self)
 

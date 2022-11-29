@@ -29,10 +29,14 @@ def handle_events():
             boy.handle_event(event)
 
 goblin_crowd = None
+tree1 = None
+tree2 = None
+fortress1 = None
+fortress2 = None
 bossmonster_condition = 0
 # 초기화
 def enter():
-    global boy, goblin_crowd, font
+    global boy, goblin_crowd, font, tree1, tree2
     boy = Character()
     ui = UI_class()
     background_UI = background()
@@ -66,6 +70,11 @@ def enter():
 # 종료
 def exit():
     game_world.clear()
+    game_world.remove_collision_object(fortress1)
+    game_world.remove_collision_object(fortress2)
+    game_world.remove_collision_object(tree1)
+    game_world.remove_collision_object(tree2)
+
 
 def update():
     for game_object in game_world.all_objects():
@@ -78,14 +87,22 @@ def update():
             a.handle_collision(b, group)
             b.handle_collision(a, group)
     global bossmonster_condition
-    if game_world.normal_goblin_cnt == 10 and bossmonster_condition == 0:
-        bossmonster_condition += 1
+    if game_world.normal_goblin_cnt == 10 and bossmonster_condition == 0: #보스몬스터 출현
+        bossmonster_condition = 1
         boss = Boss_monster()
         game_world.add_object(boss, 1)
         game_world.add_collision_pairs(None, boss, 'my_bullet:boss')
+        game_world.add_collision_pairs(boy, boss, 'boy:boss')
+        game_world.add_collision_pairs(fortress1, boss, 'fortress1:boss')
+        game_world.add_collision_pairs(fortress2, boss, 'fortress2:boss')
+        game_world.add_collision_pairs(tree1, boss, 'tree1:boss')
+        game_world.add_collision_pairs(tree2, boss, 'tree2:boss')
+        game_world.add_collision_pairs(None, boss, 'my_bullet:boss')
+        game_world.add_collision_pairs(None, boss, 'my_cannon:boss')
+        game_world.add_collision_pairs(None, boss, 'cannon_bullet:boss')
 
 
-    if game_world.normal_goblin_cnt == 0:
+    if game_world.normal_goblin_cnt == 0 and game_world.first_boss_cnt == 0:
         game_framework.change_state(first_game_clear_state)
 
 

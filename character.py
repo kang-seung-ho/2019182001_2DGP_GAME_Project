@@ -60,7 +60,9 @@ class IDLE:
         if self.face_dir == 1:
             self.image.clip_draw(self.frame * 59, 56 * 4, 59, 56, self.x, self.y, 120, 120)
         else:
-            self.image.clip_draw(self.frame * 59, 56 * 4, 59, 56, self.x, self.y, 120, 120)
+            self.image.clip_composite_draw(int(self.frame) * 59, 56 * 4, 59, 56, 0, 'h', self.x - 22, self.y, 120, 120)
+            #                                         (left, bottom, width, height, rad, flip, x, y, w = None, h = None):
+            # self.image.clip_draw(self.frame * 59, 56 * 4, 59, 56, self.x, self.y, 120, 120)
 
 
 
@@ -320,7 +322,7 @@ class Character:
 
     #59 * 56
     def get_bb(self):
-        return self.x-35, self.y-29, self.x+20, self.y+55
+        return self.x-35, self.y-29, self.x+18, self.y+55
 
 
     def handle_collision(self, other, group):

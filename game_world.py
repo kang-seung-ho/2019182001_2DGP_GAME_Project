@@ -13,10 +13,7 @@ first_boss_cnt = 1
 
 
 
-
-
-
-second_state_normal_goblin_cnt = 20
+second_state_normal_goblin_cnt = 23
 second_stage_special_goblin_cnt = 3
 coin = 50
 character_power = 40

@@ -11,7 +11,7 @@ import title_state
 import first_game_clear_state
 from tree_spring import Tree
 from boss_monster import Boss_monster
-from special_goblin import Special_goblin
+
 
 boy = None
 
@@ -35,7 +35,7 @@ tree2 = None
 fortress1 = None
 fortress2 = None
 bossmonster_condition = 0
-special_monster_condition = 0
+
 # 초기화
 def enter():
     global boy, goblin_crowd, font, tree1, tree2
@@ -103,28 +103,13 @@ def update():
         game_world.add_collision_pairs(None, boss, 'my_cannon:boss')
         game_world.add_collision_pairs(None, boss, 'cannon_bullet:boss')
 
-    if game_world.normal_goblin_cnt == 5 and special_monster_condition == 0:
-        special_monster_condition = 1
-        special_goblins = [Special_goblin() for i in range(3)]
-        for i in range(3):
-            game_world.add_object(special_goblins[i], 1)
-
-
-        game_world.add_collision_pairs(None, special_goblins, 'my_bullet:special_goblin')
-        game_world.add_collision_pairs(boy, special_goblins, 'boy:special_goblin')
-        game_world.add_collision_pairs(fortress1, special_goblins, 'fortress1:special_goblin')
-        game_world.add_collision_pairs(fortress2, special_goblins, 'fortress2:special_goblin')
-        game_world.add_collision_pairs(tree1, special_goblins, 'tree1:special_goblin')
-        game_world.add_collision_pairs(tree2, special_goblins, 'tree2:special_goblin')
-        game_world.add_collision_pairs(None, special_goblins, 'my_bullet:special_goblin')
-        game_world.add_collision_pairs(None, special_goblins, 'my_cannon:special_goblin')
-        game_world.add_collision_pairs(None, special_goblins, 'cannon_bullet:special_goblin')
 
 
 
 
 
-    if game_world.normal_goblin_cnt == 0 and game_world.first_boss_cnt == 0:
+
+    if game_world.normal_goblin_cnt <= 0 and game_world.first_boss_cnt <= 0:
         game_framework.change_state(first_game_clear_state)
 
 

@@ -10,6 +10,7 @@ import help_state
 import title_state
 from tree_spring import Tree
 import second_game_clear_state
+from special_goblin import Special_goblin
 
 boy = None
 
@@ -28,17 +29,25 @@ def handle_events():
             boy.handle_event(event)
 
 goblin_crowd = None
+special_monster_condition = 0
+fortress1 = None
+fortress2 = None
+fortress3 = None
+tree1 = None
+tree2 = None
+
 # 초기화
 def enter():
     game_world.background_state = 'summer'
     global boy, goblin_crowd, font
+    global fortress1, fortress2, fortress3, tree1, tree2
     boy = Character()
     ui = UI_class()
     background_UI = background()
     fortress1 = Fortress(300, 530)
     fortress2 = Fortress(400, 190)
-    fortress3 = Fortress(600, 190)
-    goblin_crowd = [Normal_goblin() for i in range(30)]
+    fortress3 = Fortress(550, 415)
+    goblin_crowd = [Normal_goblin() for i in range(23)]
     tree1 = Tree(700, 295)
     tree2 = Tree(400, 655)
 
@@ -51,7 +60,7 @@ def enter():
     game_world.add_object(fortress3, 1)
     game_world.add_object(tree1, 1)
     game_world.add_object(tree2, 1)
-    for i in range(30):
+    for i in range(23):
         game_world.add_object(goblin_crowd[i], 1)
 
     game_world.add_collision_pairs(boy, goblin_crowd, 'boy:goblin_crowd')
@@ -79,8 +88,27 @@ def update():
             print('COLLISION ', group)
             a.handle_collision(b, group)
             b.handle_collision(a, group)
+    global special_monster_condition
+    if game_world.normal_goblin_cnt == 11 and special_monster_condition == 0:
+        special_monster_condition = 1
+        special_goblins = [Special_goblin() for i in range(3)]
+        for i in range(3):
+            game_world.add_object(special_goblins[i], 1)
 
-    if game_world.second_state_normal_goblin_cnt == 0:
+
+        game_world.add_collision_pairs(None, special_goblins, 'my_bullet:special_goblin')
+        game_world.add_collision_pairs(boy, special_goblins, 'boy:special_goblin')
+        game_world.add_collision_pairs(fortress1, special_goblins, 'fortress1:special_goblin')
+        game_world.add_collision_pairs(fortress2, special_goblins, 'fortress2:special_goblin')
+        game_world.add_collision_pairs(fortress3, special_goblins, 'fortress3:special_goblin')
+        game_world.add_collision_pairs(tree1, special_goblins, 'tree1:special_goblin')
+        game_world.add_collision_pairs(tree2, special_goblins, 'tree2:special_goblin')
+        game_world.add_collision_pairs(None, special_goblins, 'my_bullet:special_goblin')
+        game_world.add_collision_pairs(None, special_goblins, 'my_cannon:special_goblin')
+        game_world.add_collision_pairs(None, special_goblins, 'cannon_bullet:special_goblin')
+    
+    #클리어 조건
+    if game_world.second_state_normal_goblin_cnt <= 0 and game_world.second_stage_special_goblin_cnt <= 0:
         game_framework.change_state(second_game_clear_state)
 
 
@@ -110,3 +138,14 @@ def collide(a, b):
     if ba > tb: return False
 
     return True
+
+
+def test_self():
+    import second_play_state
+
+    pico2d.open_canvas(1280, 720)
+    game_framework.run(second_play_state)
+    pico2d.clear_canvas()
+
+if __name__ == '__main__':
+    test_self()

@@ -78,6 +78,7 @@ class Special_goblin:
             game_world.coin += 15
             self.die_sound.play()
             game_world.remove_objects(self)
+            game_world.remove_collision_object(self)
 
     def draw(self):
         if self.state == 'RUN':
@@ -98,6 +99,8 @@ class Special_goblin:
         elif group == 'fortress1:special_goblin':
             self.RUN_SPEED_PPS = 0
         elif group == 'fortress2:special_goblin':
+            self.RUN_SPEED_PPS = 0
+        elif group == 'fortress3:special_goblin':
             self.RUN_SPEED_PPS = 0
         elif group == 'tree1:special_goblin':
             self.RUN_SPEED_PPS = 0

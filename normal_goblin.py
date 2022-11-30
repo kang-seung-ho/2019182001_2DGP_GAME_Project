@@ -80,7 +80,11 @@ class Normal_goblin:
             game_framework.change_state(game_over_state)
 
         if self.hp <= 0:
-            game_world.normal_goblin_cnt -= 1
+            if game_world.background_state == 'spring':
+                game_world.normal_goblin_cnt -= 1
+            elif game_world.background_state == 'summer':
+                game_world.second_state_normal_goblin_cnt -= 1
+
             game_world.coin += 10
             self.die_sound.play()
             game_world.remove_objects(self)

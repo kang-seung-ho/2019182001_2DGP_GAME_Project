@@ -56,6 +56,8 @@ class Special_goblin:
         self.frame = 0
         self.power = 40
 
+        self.die_sound = load_music('resources/sound/effect/monster_die.mp3')
+        self.die_sound.set_volume(60)
 
         self.state = 'RUN'
 
@@ -74,6 +76,7 @@ class Special_goblin:
         if self.hp <= 0:
             game_world.second_stage_special_goblin_cnt -= 1
             game_world.coin += 15
+            self.die_sound.play()
             game_world.remove_objects(self)
 
     def draw(self):

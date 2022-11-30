@@ -8,7 +8,7 @@ objects = [[], []]
 collision_group = dict()
 
 bullet_list = []
-normal_goblin_cnt = 20
+normal_goblin_cnt = 13
 first_boss_cnt = 1
 second_state_normal_goblin_cnt = 20
 coin = 50

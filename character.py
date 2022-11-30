@@ -105,11 +105,8 @@ class RUN:
     def do(self):
         self.frame = (self.frame + 1) % 5
         # x 좌표 변경, 달리기
-        self.x += self.dir
-        self.y += self.diry
-
-        # self.x += self.dir * 5
-        # self.y += self.diry * 5
+        self.x += self.dir*2
+        self.y += self.diry*2
 
         if self.x > 1220:
             self.x = self.x - self.dir * 5
@@ -136,23 +133,7 @@ class ATTACK:
 
     def enter(self, event):
         print('attack')
-        #
-        # if event == RD:
-        #     self.dir += 1
-        # elif event == LD:
-        #     self.dir -= 1
-        # elif event == RU:
-        #     self.dir -= 1
-        # elif event == LU:
-        #     self.dir += 1
-        # elif event == UD:
-        #     self.diry += 1
-        # elif event == UU:
-        #     self.diry -= 1
-        # elif event == DD:
-        #     self.diry -= 1
-        # elif event == DU:
-        #     self.diry += 1
+
 
     def exit(self, event):
         print('EXIT attack')
@@ -328,6 +309,8 @@ class Character:
     def handle_collision(self, other, group):
         if group == 'boy:goblin_crowd':
             self.hp -= 2
+        elif group == 'boy:boss:':
+            self.hp -= 4
 
 
 

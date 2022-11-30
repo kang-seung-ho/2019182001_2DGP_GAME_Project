@@ -42,7 +42,7 @@ def enter():
     background_UI = background()
     fortress1 = Fortress(300, 530)
     fortress2 = Fortress(400, 190)
-    goblin_crowd = [Normal_goblin() for i in range(20)]
+    goblin_crowd = [Normal_goblin() for i in range(13)]
     tree1 = Tree(700, 295)
     tree2 = Tree(400, 655)
 
@@ -55,7 +55,7 @@ def enter():
     game_world.add_object(fortress2, 1)
     game_world.add_object(tree1, 1)
     game_world.add_object(tree2, 1)
-    for i in range(20):
+    for i in range(13):
         game_world.add_object(goblin_crowd[i], 1)
 
     game_world.add_collision_pairs(boy, goblin_crowd, 'boy:goblin_crowd')
@@ -87,7 +87,7 @@ def update():
             a.handle_collision(b, group)
             b.handle_collision(a, group)
     global bossmonster_condition
-    if game_world.normal_goblin_cnt == 10 and bossmonster_condition == 0: #보스몬스터 출현
+    if game_world.normal_goblin_cnt == 6 and bossmonster_condition == 0: #보스몬스터 출현
         bossmonster_condition = 1
         boss = Boss_monster()
         game_world.add_object(boss, 1)

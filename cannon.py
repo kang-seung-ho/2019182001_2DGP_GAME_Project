@@ -37,3 +37,5 @@ class Cannon:
             self.hp -= 1
         elif group == 'my_cannon:boss':
             self.hp -= 2
+        elif group == 'my_cannon:special_goblin':
+            self.hp -= 1

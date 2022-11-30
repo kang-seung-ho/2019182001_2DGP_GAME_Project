@@ -259,6 +259,7 @@ class Character:
         game_world.add_object(my_bullet, 1)
         game_world.add_collision_pairs(my_bullet, None, 'my_bullet:goblin_crowd')
         game_world.add_collision_pairs(my_bullet, None, 'my_bullet:boss')
+        game_world.add_collision_pairs(my_bullet, None, 'my_bullet:special_goblin')
 
 
 
@@ -274,6 +275,7 @@ class Character:
             game_world.add_object(my_cannon, 1)
             game_world.add_collision_pairs(my_cannon, None, 'my_cannon:goblin_crowd')
             game_world.add_collision_pairs(my_cannon, None, 'my_cannon:boss')
+            game_world.add_collision_pairs(my_cannon, None, 'my_cannon:special_goblin')
             game_world.coin -= 50
             # self.cannon_install_sound.play()
 
@@ -311,6 +313,8 @@ class Character:
             self.hp -= 2
         elif group == 'boy:boss:':
             self.hp -= 4
+        elif group == 'boy:special_goblin':
+            self.hp -= 3
 
 
 

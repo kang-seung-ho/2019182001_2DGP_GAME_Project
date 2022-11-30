@@ -31,3 +31,7 @@ class Tree:
             self.hp -= 1
         elif group == 'tree2:boss':
             self.hp -= 1
+        elif group == 'tree1:special_goblin':
+            self.hp -= 0.9
+        elif group == 'tree2:special_goblin':
+            self.hp -= 0.9

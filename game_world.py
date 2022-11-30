@@ -10,7 +10,14 @@ collision_group = dict()
 bullet_list = []
 normal_goblin_cnt = 13
 first_boss_cnt = 1
+
+
+
+
+
+
 second_state_normal_goblin_cnt = 20
+second_stage_special_goblin_cnt = 3
 coin = 50
 character_power = 40
 background_state = 'spring'

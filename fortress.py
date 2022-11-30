@@ -31,3 +31,7 @@ class Fortress:
             self.hp -= 1
         elif group == 'fortress2:boss':
             self.hp -= 1
+        elif group == 'fortress1:special_goblin':
+            self.hp -= 0.9
+        elif group == 'fortress2:special_goblin':
+            self.hp -= 0.9

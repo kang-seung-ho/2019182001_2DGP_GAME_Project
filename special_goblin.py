@@ -15,12 +15,8 @@ RUN_SPEED_KMPH = 2.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 
-
-power = None
-
-class Normal_goblin:
+class Special_goblin:
     def __init__(self):
-        global power, hp
 
         self.randnum = random.randint(1, 10000) % 8
         if self.randnum == 0:
@@ -28,11 +24,9 @@ class Normal_goblin:
         else:
             self.RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
-        self.image = load_image('resources/sprite_sheet/goblinsword.png')
+        self.image = load_image('resources/sprite_sheet/goblinsword_surprize.png')
         self.attacked = load_image('resources/sprite_sheet/goblinsword_attacked.png')
-        self.x = random.randint(1300, 2000)
-        rand_x = random.randint(200, 400)
-        self.x += rand_x
+        self.x = random.randint(800, 1000)
         rand_y = random.randint(0, 4+1)
         monster_y = 180
         if rand_y == 0:
@@ -78,8 +72,8 @@ class Normal_goblin:
             game_framework.change_state(game_over_state)
 
         if self.hp <= 0:
-            game_world.normal_goblin_cnt -= 1
-            game_world.coin += 10
+            game_world.second_stage_special_goblin_cnt -= 1
+            game_world.coin += 15
             game_world.remove_objects(self)
 
     def draw(self):
@@ -96,22 +90,22 @@ class Normal_goblin:
         return self.x - 33, self.y - 45, self.x + 37, self.y + 53
 
     def handle_collision(self, other, group):
-        if group == 'boy:goblin_crowd':
+        if group == 'boy:special_goblin':
             self.RUN_SPEED_PPS = 0
-        elif group == 'fortress1:goblin_crowd':
+        elif group == 'fortress1:special_goblin':
             self.RUN_SPEED_PPS = 0
-        elif group == 'fortress2:goblin_crowd':
+        elif group == 'fortress2:special_goblin':
             self.RUN_SPEED_PPS = 0
-        elif group == 'tree1:goblin_crowd':
+        elif group == 'tree1:special_goblin':
             self.RUN_SPEED_PPS = 0
-        elif group == 'tree2:goblin_crowd':
+        elif group == 'tree2:special_goblin':
             self.RUN_SPEED_PPS = 0
-        elif group == 'my_bullet:goblin_crowd':
+        elif group == 'my_bullet:special_goblin':
             self.state = 'ATTACKED'
             self.hp -= game_world.character_power
-        elif group == 'my_cannon:goblin_crowd':
+        elif group == 'my_cannon:special_goblin':
             self.RUN_SPEED_PPS = 0
-        elif group == 'cannon_bullet:goblin_crowd':
+        elif group == 'cannon_bullet:special_goblin':
             self.state = 'ATTACKED'
             self.hp -= 60
 

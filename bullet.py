@@ -32,3 +32,5 @@ class Bullet:
             game_world.remove_objects(self)
         elif group == 'my_bullet:boss':
             game_world.remove_objects(self)
+        elif group == 'my_bullet:special_goblin':
+            game_world.remove_objects(self)

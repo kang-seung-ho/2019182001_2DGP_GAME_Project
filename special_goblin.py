@@ -56,7 +56,7 @@ class Special_goblin:
         self.frame = 0
         self.power = 40
 
-        self.die_sound = load_music('resources/sound/effect/monster_die.mp3')
+        self.die_sound = load_wav('resources/sound/effect/monster_die.wav')
         self.die_sound.set_volume(60)
 
         self.state = 'RUN'
@@ -74,8 +74,13 @@ class Special_goblin:
             game_framework.change_state(game_over_state)
 
         if self.hp <= 0:
-            game_world.second_stage_special_goblin_cnt -= 1
-            game_world.coin += 15
+            if game_world.background_state == 'summer':
+                game_world.second_stage_special_goblin_cnt -= 1
+            elif game_world.background_state == 'winter':
+                game_world.third_state_normal_goblin_cnt -= 1
+                game_world.third_stage_special_goblin_cnt -= 1
+
+            game_world.coin += 10
             self.die_sound.play()
             game_world.remove_objects(self)
             game_world.remove_collision_object(self)
@@ -88,7 +93,7 @@ class Special_goblin:
             self.state = 'RUN'
 
 
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def get_bb(self):
         return self.x - 33, self.y - 45, self.x + 37, self.y + 53
@@ -105,6 +110,8 @@ class Special_goblin:
         elif group == 'tree1:special_goblin':
             self.RUN_SPEED_PPS = 0
         elif group == 'tree2:special_goblin':
+            self.RUN_SPEED_PPS = 0
+        elif group == 'tree3:special_goblin':
             self.RUN_SPEED_PPS = 0
         elif group == 'my_bullet:special_goblin':
             self.state = 'ATTACKED'

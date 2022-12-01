@@ -11,7 +11,7 @@ class Fortress:
 
     def draw(self):
         self.image.draw(self.x, self.y, 120, 120)
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def update(self):
         if self.hp <= 0:

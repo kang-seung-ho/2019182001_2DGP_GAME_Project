@@ -14,7 +14,7 @@ class Can_bullet:
 
     def draw(self):
         self.image.draw(self.x, self.y, 20, 20)
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def update(self):
         self.x += self.velocity

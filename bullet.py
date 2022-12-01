@@ -14,7 +14,7 @@ class Bullet:
 
     def draw(self):
         self.image.draw(self.x + 5, self.y, 20, 20)
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
 
     def update(self):

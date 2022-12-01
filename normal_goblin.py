@@ -30,9 +30,8 @@ class Normal_goblin:
 
         self.image = load_image('resources/sprite_sheet/goblinsword.png')
         self.attacked = load_image('resources/sprite_sheet/goblinsword_attacked.png')
-        self.x = random.randint(1300, 2000)
-        rand_x = random.randint(200, 400)
-        self.x += rand_x
+        self.x = random.randint(1300, 1900)
+
         rand_y = random.randint(0, 4+1)
         monster_y = 180
         if rand_y == 0:
@@ -61,7 +60,7 @@ class Normal_goblin:
         self.hp = 200
         self.frame = 0
         self.power = 40
-        self.die_sound = load_music('resources/sound/effect/monster_die.mp3')
+        self.die_sound = load_wav('resources/sound/effect/monster_die.wav')
         self.die_sound.set_volume(60)
 
 
@@ -84,8 +83,11 @@ class Normal_goblin:
                 game_world.normal_goblin_cnt -= 1
             elif game_world.background_state == 'summer':
                 game_world.second_state_normal_goblin_cnt -= 1
+            elif game_world.background_state == 'winter':
+                game_world.third_state_normal_goblin_cnt -= 1
 
-            game_world.coin += 10
+
+            game_world.coin += 5
             self.die_sound.play()
             game_world.remove_objects(self)
 
@@ -97,7 +99,7 @@ class Normal_goblin:
             self.state = 'RUN'
 
 
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def get_bb(self):
         return self.x - 33, self.y - 45, self.x + 37, self.y + 53
@@ -112,6 +114,8 @@ class Normal_goblin:
         elif group == 'tree1:goblin_crowd':
             self.RUN_SPEED_PPS = 0
         elif group == 'tree2:goblin_crowd':
+            self.RUN_SPEED_PPS = 0
+        elif group == 'tree3:goblin_crowd':
             self.RUN_SPEED_PPS = 0
         elif group == 'my_bullet:goblin_crowd':
             self.state = 'ATTACKED'

@@ -105,7 +105,7 @@ class RUN:
     def do(self):
         self.frame = (self.frame + 1) % 5
         # x 좌표 변경, 달리기
-        self.x += self.dir*2
+        self.x += self.dir*1
         self.y += self.diry*2
 
         if self.x > 1220:
@@ -192,12 +192,12 @@ class Character:
         self.hp = 600
         self.cannon_cnt = 0
         self.hp_UI = load_image('resources/ui/hp.png')
-        self.fire_sound = load_music('resources/sound/effect/fire_sound.mp3')
+        self.fire_sound = load_wav('resources/sound/effect/fire_sound.wav')
         self.fire_sound.set_volume(70)
-        self.heal_sound = load_music('resources/sound/effect/heal.mp3')
+        self.heal_sound = load_wav('resources/sound/effect/heal.wav')
         self.heal_sound.set_volume(60)
         self.power = 60
-        self.power_up_sound = load_music('resources/sound/effect/power_up.mp3')
+        self.power_up_sound = load_wav('resources/sound/effect/power_up.wav')
         self.power_up_sound.set_volume(60)
         # self.cannon_install_sound = load_music()
         # self.cannon_install_sound.set_volume(60)
@@ -243,7 +243,7 @@ class Character:
             self.game_over_sound.play()
             game_framework.change_state(game_over_state)
 
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
         self.font.draw(1000, 80, f'COIN: {game_world.coin}', (0, 0, 0))
 
     my_bullet = None

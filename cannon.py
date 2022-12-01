@@ -15,7 +15,7 @@ class Cannon:
 
     def draw(self):
         self.image.draw(self.x+10, self.y, 100, 100)
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def update(self):
         self.end_time = time.time()

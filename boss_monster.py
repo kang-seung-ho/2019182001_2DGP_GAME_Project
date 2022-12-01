@@ -30,6 +30,26 @@ class Boss_monster:
         self.x = random.randint(1300, 2000)
 
         self.x = 1400
+        rand_y = random.randint(0, 4+1)
+        monster_y = 180
+        if rand_y == 0:
+            monster_y = 600
+        elif rand_y == 1:
+            monster_y = 500
+        elif rand_y == 3:
+            monster_y = 300
+
+        rand_y = random.randint(0, 4 + 1)
+        if monster_y == 180:
+            if rand_y == 1:
+                monster_y = 530
+            elif rand_y == 2:
+                monster_y = 410
+            elif rand_y == 3:
+                monster_y = 300
+
+        self.y = monster_y
+
         self.y = 720//2
         self.hp = 2000
         self.frame = 0
@@ -49,8 +69,12 @@ class Boss_monster:
             game_framework.change_state(game_over_state)
 
         if self.hp <= 0:
-            game_world.first_boss_cnt -= 1
-            game_world.coin += 10
+            if game_world.background_state == 'spring':
+                game_world.first_boss_cnt -= 1
+            elif game_world.background_state == 'winter':
+                game_world.third_boss_cnt -= 1
+
+            game_world.coin += 15
             game_world.remove_objects(self)
             game_world.remove_collision_object(self)
 
@@ -62,7 +86,7 @@ class Boss_monster:
             self.state = 'RUN'
 
 
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def get_bb(self):
         return self.x - 92, self.y - 75, self.x + 85, self.y + 55
@@ -81,6 +105,9 @@ class Boss_monster:
             self.RUN_SPEED_PPS = 0
             self.state = 'ATTACK'
         elif group == 'tree2:boss':
+            self.RUN_SPEED_PPS = 0
+            self.state = 'ATTACK'
+        elif group == 'tree3:boss':
             self.RUN_SPEED_PPS = 0
             self.state = 'ATTACK'
         elif group == 'my_bullet:boss':

@@ -253,7 +253,7 @@ class Character:
             self.face_dir = 1
         global my_bullet
         my_bullet = Bullet(self.x + 15, self.y + 15, self.face_dir*2.5)
-        game_world.bullet_list.append(my_bullet)
+        # game_world.bullet_list.append(my_bullet)
 
         self.fire_sound.play()
         game_world.add_object(my_bullet, 1)

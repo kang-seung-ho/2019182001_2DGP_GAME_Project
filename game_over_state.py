@@ -7,6 +7,9 @@ sound = None
 def enter(): #객체 생성하는 함수
     global image, sound
     image = load_image('resources/system/game_over_img.png')
+    sound = load_wav('resources/sound/system/game_over.wav')
+    sound.set_volume(60)
+    sound.play()
 
 
 def exit():
@@ -17,7 +20,6 @@ def update():
     pass
 
 def draw():
-    global sound
     clear_canvas()
     image.draw(1280//2, 720//2)
     update_canvas()

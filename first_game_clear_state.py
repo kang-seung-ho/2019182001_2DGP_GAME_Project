@@ -8,8 +8,9 @@ sound = None
 def enter(): #객체 생성하는 함수
     global image, sound
     image = load_image('resources/system/game_clear.png')
-    sound = load_music('resources/sound/system/stage_clear.mp3')
+    sound = load_wav('resources/sound/system/stage_clear.wav')
     sound.set_volume(70)
+    sound.play()
     print('enter first_game_clear_state')
 
 def exit():
@@ -24,7 +25,6 @@ def draw():
     global sound
     clear_canvas()
     image.draw(1280//2, 720//2)
-    sound.play()
     update_canvas()
 
 def handle_events():

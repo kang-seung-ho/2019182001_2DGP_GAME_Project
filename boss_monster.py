@@ -26,6 +26,8 @@ class Boss_monster:
         self.RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
         self.image = load_image('resources/sprite_sheet/first_boss_monster1.png')
+        self.death_sound = load_wav('resources/sound/effect/boss_die.wav')
+        self.death_sound.set_volume(70)
         self.x = random.randint(1300, 2000)
 
         self.x = 1400
@@ -72,7 +74,7 @@ class Boss_monster:
                 game_world.second_boss_cnt -= 1
             elif game_world.background_state == 'winter':
                 game_world.third_boss_cnt -= 1
-
+            self.death_sound.play()
             game_world.coin += 15
             game_world.remove_objects(self)
             game_world.remove_collision_object(self)

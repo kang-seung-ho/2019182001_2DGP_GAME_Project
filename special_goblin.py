@@ -77,7 +77,6 @@ class Special_goblin:
             if game_world.background_state == 'summer':
                 game_world.second_stage_special_goblin_cnt -= 1
             elif game_world.background_state == 'winter':
-                game_world.third_state_normal_goblin_cnt -= 1
                 game_world.third_stage_special_goblin_cnt -= 1
 
             game_world.coin += 10

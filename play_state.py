@@ -9,7 +9,7 @@ from fortress import Fortress
 import help_state
 import title_state
 import first_game_clear_state
-from tree_spring import Tree
+from tree import Tree
 from boss_monster import Boss_monster
 
 

@@ -8,7 +8,7 @@ from normal_goblin import Normal_goblin
 from fortress import Fortress
 import help_state
 import title_state
-from tree_spring import Tree
+from tree import Tree
 import second_game_clear_state
 from special_goblin import Special_goblin
 

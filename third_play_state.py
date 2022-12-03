@@ -9,7 +9,7 @@ from fortress import Fortress
 import help_state
 import title_state
 import third_game_clear_state
-from tree_spring import Tree
+from tree import Tree
 from boss_monster import Boss_monster
 from special_goblin import Special_goblin
 
@@ -51,7 +51,7 @@ def enter():
     goblin_crowd = [Normal_goblin() for i in range(30)]
     tree1 = Tree(700, 295)
     tree2 = Tree(400, 655)
-    tree3 = Tree(800, 530)
+    tree3 = Tree(800, 420)
 
 
     game_world.add_object(background_UI, 0)

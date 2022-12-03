@@ -79,13 +79,13 @@ class RUN:
         elif event == LU:
             self.dir += 1
         elif event == UD:
-            self.diry += 1
+            self.diry += 3
         elif event == UU:
-            self.diry -= 1
+            self.diry -= 3
         elif event == DD:
-            self.diry -= 1
+            self.diry -= 3
         elif event == DU:
-            self.diry += 1
+            self.diry += 3
 
 
     def exit(self, event):
@@ -179,7 +179,7 @@ class Character:
 
     
     def __init__(self):
-        self.x, self.y = 1280//2, 720//2
+        self.x, self.y = 1280//2, 720//2 + 20
         self.frame = 0
         self.dir = 0
         self.face_dir = 1

@@ -10,10 +10,12 @@ def enter(): #객체 생성하는 함수
     image = load_image('resources/system/game_clear.png')
     sound = load_music('resources/sound/system/stage_clear.mp3')
     sound.set_volume(70)
+    print('enter first_game_clear_state')
 
 def exit():
     global image
     del image
+    print('exit first_game_clear_state')
 
 def update():
     pass

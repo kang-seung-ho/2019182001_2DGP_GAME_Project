@@ -86,7 +86,6 @@ class Normal_goblin:
             elif game_world.background_state == 'winter':
                 game_world.third_state_normal_goblin_cnt -= 1
 
-
             game_world.coin += 5
             self.die_sound.play()
             game_world.remove_objects(self)

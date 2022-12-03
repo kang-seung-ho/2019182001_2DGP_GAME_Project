@@ -22,7 +22,9 @@ class Tree:
 
     def update(self):
         if self.hp <= 0:
+            game_world.remove_collision_object(self)
             game_world.remove_objects(self)
+
 
     def get_bb(self):
         return self.x-47, self.y-55, self.x+48, self.y+57

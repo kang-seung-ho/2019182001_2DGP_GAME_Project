@@ -26,7 +26,6 @@ class Boss_monster:
         self.RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
         self.image = load_image('resources/sprite_sheet/first_boss_monster1.png')
-        # self.attacked = load_image('resources/sprite_sheet/goblinsword_attacked.png')
         self.x = random.randint(1300, 2000)
 
         self.x = 1400
@@ -39,18 +38,16 @@ class Boss_monster:
         elif rand_y == 3:
             monster_y = 300
 
-        rand_y = random.randint(0, 4 + 1)
+        rand_y = random.randint(0, 2)
         if monster_y == 180:
             if rand_y == 1:
                 monster_y = 530
             elif rand_y == 2:
-                monster_y = 410
-            elif rand_y == 3:
                 monster_y = 300
 
         self.y = monster_y
 
-        self.y = 720//2
+        # self.y = 720//2
         self.hp = 2000
         self.frame = 0
         self.power = 40

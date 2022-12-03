@@ -1,3 +1,4 @@
+import game_world
 from pico2d import *
 import game_framework
 import third_play_state
@@ -10,6 +11,7 @@ def enter(): #객체 생성하는 함수
     sound = load_wav('resources/sound/system/stage_clear.wav')
     sound.set_volume(70)
     sound.play()
+    game_world.cannon_cnt = 0
 
 def exit():
     global image

@@ -13,14 +13,18 @@ first_boss_cnt = 1
 
 second_state_normal_goblin_cnt = 20
 second_stage_special_goblin_cnt = 3
+second_boss_cnt = 2
 
 third_state_normal_goblin_cnt = 30
 third_stage_special_goblin_cnt = 6
-third_boss_cnt = 1
+third_boss_cnt = 3
 
 coin = 0
 character_power = 40
 background_state = 'spring'
+cannon_cnt = 0
+
+remove_stage_object = 1
 
 def add_object(o, depth):
     objects[depth].append(o)
@@ -44,6 +48,10 @@ def clear():
         del o
     for layer in objects:
         layer.clear()
+
+#test
+    for o in all_collision_pairs():
+        del o
 
 def add_collision_pairs(a, b, group):
     if group not in collision_group:

@@ -38,6 +38,7 @@ tree2 = None
 tree3 = None
 # 초기화
 def enter():
+    game_world.collision_group.clear()
     game_world.background_state = 'winter'
     global boy, goblin_crowd, font
     global fortress1, fortress2, fortress3

@@ -68,6 +68,8 @@ class Boss_monster:
         if self.hp <= 0:
             if game_world.background_state == 'spring':
                 game_world.first_boss_cnt -= 1
+            elif game_world.background_state == 'summer':
+                game_world.second_boss_cnt -= 1
             elif game_world.background_state == 'winter':
                 game_world.third_boss_cnt -= 1
 

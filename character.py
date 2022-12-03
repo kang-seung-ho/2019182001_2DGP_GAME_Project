@@ -79,13 +79,13 @@ class RUN:
         elif event == LU:
             self.dir += 1
         elif event == UD:
-            self.diry += 3
+            self.diry += 2
         elif event == UU:
-            self.diry -= 3
+            self.diry -= 2
         elif event == DD:
-            self.diry -= 3
+            self.diry -= 2
         elif event == DU:
-            self.diry += 3
+            self.diry += 2
 
 
     def exit(self, event):
@@ -190,7 +190,7 @@ class Character:
         self.cur_state = IDLE
         self.cur_state.enter(self, None) #초기상태의 entry 액션 수행
         self.hp = 600
-        self.cannon_cnt = 0
+        # self.cannon_cnt = 0
         self.hp_UI = load_image('resources/ui/hp.png')
         self.fire_sound = load_wav('resources/sound/effect/fire_sound.wav')
         self.fire_sound.set_volume(70)
@@ -199,8 +199,6 @@ class Character:
         self.power = 60
         self.power_up_sound = load_wav('resources/sound/effect/power_up.wav')
         self.power_up_sound.set_volume(60)
-        # self.cannon_install_sound = load_music()
-        # self.cannon_install_sound.set_volume(60)
         #적 처치시 코인 획득, 초기 코인 50
 
         self.font = load_font('resources/system/game_font.ttf', 60)
@@ -265,12 +263,12 @@ class Character:
 
     def install_cannon(self):
         print('install cannon')
-        if self.cannon_cnt >= 3:
+        if game_world.cannon_cnt >= 3:
             pass
         elif game_world.coin < 50:
             pass
         else:
-            self.cannon_cnt += 1
+            game_world.cannon_cnt += 1
             my_cannon = Cannon(self.x, self.y)
             game_world.add_object(my_cannon, 1)
             game_world.add_collision_pairs(my_cannon, None, 'my_cannon:goblin_crowd')

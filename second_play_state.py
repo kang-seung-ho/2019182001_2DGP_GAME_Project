@@ -11,6 +11,7 @@ import title_state
 from tree import Tree
 import second_game_clear_state
 from special_goblin import Special_goblin
+from boss_monster import Boss_monster
 
 boy = None
 
@@ -30,6 +31,7 @@ def handle_events():
 
 goblin_crowd = None
 special_monster_condition = 0
+bossmonster_condition = 0
 fortress1 = None
 fortress2 = None
 fortress3 = None
@@ -38,6 +40,7 @@ tree2 = None
 
 # 초기화
 def enter():
+    game_world.collision_group.clear()
     game_world.background_state = 'summer'
     global boy, goblin_crowd, font
     global fortress1, fortress2, fortress3, tree1, tree2
@@ -88,6 +91,26 @@ def update():
             print('COLLISION ', group)
             a.handle_collision(b, group)
             b.handle_collision(a, group)
+
+    global bossmonster_condition
+    if game_world.second_state_normal_goblin_cnt == 8 and bossmonster_condition == 0: #보스몬스터 출현
+        bossmonster_condition = 1
+        bosses = [Boss_monster() for i in range(2)]
+
+        for i in range(2):
+            game_world.add_object(bosses[i], 1)
+
+        game_world.add_collision_pairs(None, bosses, 'my_bullet:boss')
+        game_world.add_collision_pairs(boy, bosses, 'boy:boss')
+        game_world.add_collision_pairs(fortress1, bosses, 'fortress1:boss')
+        game_world.add_collision_pairs(fortress2, bosses, 'fortress2:boss')
+        game_world.add_collision_pairs(tree1, bosses, 'tree1:boss')
+        game_world.add_collision_pairs(tree2, bosses, 'tree2:boss')
+        game_world.add_collision_pairs(None, bosses, 'my_bullet:boss')
+        game_world.add_collision_pairs(None, bosses, 'my_cannon:boss')
+        game_world.add_collision_pairs(None, bosses, 'cannon_bullet:boss')
+
+
     global special_monster_condition
     if game_world.second_state_normal_goblin_cnt == 11 and special_monster_condition == 0:
         special_monster_condition = 1
@@ -108,7 +131,7 @@ def update():
         game_world.add_collision_pairs(None, special_goblins, 'cannon_bullet:special_goblin')
     
     #클리어 조건
-    if game_world.second_state_normal_goblin_cnt <= 0 and game_world.second_stage_special_goblin_cnt <= 0:
+    if game_world.second_state_normal_goblin_cnt <= 0 and game_world.second_stage_special_goblin_cnt <= 0 and game_world.second_boss_cnt <= 0:
         game_framework.change_state(second_game_clear_state)
 
 

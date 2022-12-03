@@ -2,6 +2,7 @@ from pico2d import *
 import game_framework
 import second_play_state
 import game_world
+from character import Character
 
 image = None
 sound = None
@@ -12,6 +13,8 @@ def enter(): #객체 생성하는 함수
     sound.set_volume(70)
     sound.play()
     print('enter first_game_clear_state')
+    game_world.cannon_cnt = 0
+
 
 def exit():
     global image

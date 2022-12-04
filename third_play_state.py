@@ -125,6 +125,7 @@ def update():
         game_world.add_collision_pairs(fortress3, special_goblins, 'fortress3:special_goblin')
         game_world.add_collision_pairs(tree1, special_goblins, 'tree1:special_goblin')
         game_world.add_collision_pairs(tree2, special_goblins, 'tree2:special_goblin')
+        game_world.add_collision_pairs(tree3, special_goblins, 'tree3:special_goblin')
         game_world.add_collision_pairs(None, special_goblins, 'my_bullet:special_goblin')
         game_world.add_collision_pairs(None, special_goblins, 'my_cannon:special_goblin')
         game_world.add_collision_pairs(None, special_goblins, 'cannon_bullet:special_goblin')

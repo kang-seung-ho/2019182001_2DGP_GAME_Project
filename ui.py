@@ -9,7 +9,7 @@ class UI_class:
         self.attack = load_image('resources/ui/gun.png')
         self.cannon = load_image('resources/ui/cannon.png')
         self.bgm = load_music('resources/sound/bgm/stage1_main_bgm.mp3')
-        self.bgm.set_volume(50)
+        self.bgm.set_volume(100)
         self.bgm.repeat_play()
 
     def update(self):

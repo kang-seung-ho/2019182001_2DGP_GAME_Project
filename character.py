@@ -79,13 +79,13 @@ class RUN:
         elif event == LU:
             self.dir += 1
         elif event == UD:
-            self.diry += 2
+            self.diry += 1
         elif event == UU:
-            self.diry -= 2
+            self.diry -= 1
         elif event == DD:
-            self.diry -= 2
+            self.diry -= 1
         elif event == DU:
-            self.diry += 2
+            self.diry += 1
 
 
     def exit(self, event):

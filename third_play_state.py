@@ -105,6 +105,7 @@ def update():
         game_world.add_collision_pairs(boy, bosses, 'boy:boss')
         game_world.add_collision_pairs(fortress1, bosses, 'fortress1:boss')
         game_world.add_collision_pairs(fortress2, bosses, 'fortress2:boss')
+        game_world.add_collision_pairs(fortress3, bosses, 'fortress3:boss')
         game_world.add_collision_pairs(tree1, bosses, 'tree1:boss')
         game_world.add_collision_pairs(tree2, bosses, 'tree2:boss')
         game_world.add_collision_pairs(tree3, bosses, 'tree2:boss')

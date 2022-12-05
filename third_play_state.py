@@ -77,7 +77,7 @@ def enter():
     game_world.add_collision_pairs(None, goblin_crowd, 'my_bullet:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'my_cannon:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'cannon_bullet:goblin_crowd')
-    print('third play state')
+    # print('third play state')
 
 # 종료
 def exit():
@@ -90,7 +90,7 @@ def update():
 
     for a, b, group in game_world.all_collision_pairs():
         if collide(a, b):
-            print('COLLISION ', group)
+            # print('COLLISION ', group)
             a.handle_collision(b, group)
             b.handle_collision(a, group)
     global  bossmonster_condition, special_monster_condition

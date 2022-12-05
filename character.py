@@ -32,13 +32,13 @@ key_event_table = {
 
 class IDLE:
     def enter(self, event):
-        print('ENTER IDLE')
+        # print('ENTER IDLE')
         self.dir = 0
         self.diry = 0
 
 
     def exit(self, event):
-        print('EXIT IDLE')
+        # print('EXIT IDLE')
         if event == ATTK:
             self.fire()
             Bullet.draw(self)
@@ -69,7 +69,7 @@ class IDLE:
 
 class RUN:
     def enter(self, event): 
-        print('ENTER RUN')
+        # print('ENTER RUN')
         if event == RD:
             self.dir += 1
         elif event == LD:
@@ -89,7 +89,7 @@ class RUN:
 
 
     def exit(self, event):
-        print('EXIT RUN')
+        # print('EXIT RUN')
         self.face_dir = self.dir #달리고 있다가 나가게 되더라도 현재 방향을 유지하고 나갈 수 있다.
         if event == ATTK:
             self.fire()
@@ -132,11 +132,13 @@ class RUN:
 class ATTACK:
 
     def enter(self, event):
-        print('attack')
+        pass
+        # print('attack')
 
 
     def exit(self, event):
-        print('EXIT attack')
+        pass
+        # print('EXIT attack')
         # self.face_dir = self.dir #달리고 있다가 나가게 되더라도 현재 방향을 유지하고 나갈 수 있다.
 
     def do(self):
@@ -246,12 +248,11 @@ class Character:
 
     my_bullet = None
     def fire(self):
-        print('fire')
+        # print('fire')
         if self.face_dir == 0:
             self.face_dir = 1
         global my_bullet
         my_bullet = Bullet(self.x + 15, self.y + 15, self.face_dir*2.5)
-        # game_world.bullet_list.append(my_bullet)
 
         self.fire_sound.play()
         game_world.add_object(my_bullet, 1)
@@ -262,7 +263,7 @@ class Character:
 
 
     def install_cannon(self):
-        print('install cannon')
+        # print('install cannon')
         if game_world.cannon_cnt >= 3:
             pass
         elif game_world.coin < 50:
@@ -275,13 +276,12 @@ class Character:
             game_world.add_collision_pairs(my_cannon, None, 'my_cannon:boss')
             game_world.add_collision_pairs(my_cannon, None, 'my_cannon:special_goblin')
             game_world.coin -= 50
-            # self.cannon_install_sound.play()
 
     def heal(self):
-        print('heal')
+        # print('heal')
         if self.hp > 600:
             pass
-        elif game_world.coin < 50:
+        elif game_world.coin < 40:
             pass
         else:
             self.hp += 200
@@ -291,7 +291,7 @@ class Character:
     def power_up(self):
         if self.power >= 100:
             pass
-        elif game_world.coin < 50:
+        elif game_world.coin < 20:
             pass
         elif game_world.character_power >= 100:
             pass

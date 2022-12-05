@@ -38,7 +38,7 @@ bossmonster_condition = 0
 
 # 초기화
 def enter():
-    global boy, goblin_crowd, font, tree1, tree2
+    global boy, goblin_crowd, font, tree1, tree2, fortress1, fortress2
     boy = Character()
     ui = UI_class()
     background_UI = background()
@@ -83,11 +83,7 @@ def update():
         game_object.update()
 
 
-    for a, b, group in game_world.all_collision_pairs():
-        if collide(a, b):
-            # print('COLLISION ', group)
-            a.handle_collision(b, group)
-            b.handle_collision(a, group)
+
     global bossmonster_condition, special_monster_condition
     if game_world.normal_goblin_cnt == 8 and bossmonster_condition == 0: #보스몬스터 출현
         bossmonster_condition = 1
@@ -104,7 +100,11 @@ def update():
         game_world.add_collision_pairs(None, boss, 'cannon_bullet:boss')
 
 
-
+    for a, b, group in game_world.all_collision_pairs():
+        if collide(a, b):
+            # print('COLLISION ', group)
+            a.handle_collision(b, group)
+            b.handle_collision(a, group)
 
 
 

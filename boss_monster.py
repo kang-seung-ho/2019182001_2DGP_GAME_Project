@@ -102,6 +102,9 @@ class Boss_monster:
         elif group == 'fortress2:boss':
             self.RUN_SPEED_PPS = 0
             self.state = 'ATTACK'
+        elif group == 'fortress3:boss':
+            self.RUN_SPEED_PPS = 0
+            self.state = 'ATTACK'
         elif group == 'tree1:boss':
             self.RUN_SPEED_PPS = 0
             self.state = 'ATTACK'

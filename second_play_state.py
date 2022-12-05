@@ -69,7 +69,7 @@ def enter():
     game_world.add_collision_pairs(boy, goblin_crowd, 'boy:goblin_crowd')
     game_world.add_collision_pairs(fortress1, goblin_crowd, 'fortress1:goblin_crowd')
     game_world.add_collision_pairs(fortress2, goblin_crowd, 'fortress2:goblin_crowd')
-    game_world.add_collision_pairs(fortress3, goblin_crowd, 'fortress2:goblin_crowd')
+    game_world.add_collision_pairs(fortress3, goblin_crowd, 'fortress3:goblin_crowd')
     game_world.add_collision_pairs(tree1, goblin_crowd, 'tree1:goblin_crowd')
     game_world.add_collision_pairs(tree2, goblin_crowd, 'tree2:goblin_crowd')
     game_world.add_collision_pairs(None, goblin_crowd, 'my_bullet:goblin_crowd')
